@@ -1,0 +1,109 @@
+{% if collection.description != blank %}
+<div id="product-description" class="page-width" style="max-height: 170px; overflow: hidden;">
+  <h2 class="title h2">{{ collection.title }}</h2>
+  {{ collection.description }}
+</div>
+<div id="view-more-less" class="page-width cus_view_more">
+  <a id="view-more-btn">View More</a>
+  <a id="view-less-btn" style="display: none;">View Less</a>
+</div>
+{% endif %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let description = document.getElementById('product-description');
+    let viewMoreBtn = document.getElementById('view-more-btn');
+    let viewLessBtn = document.getElementById('view-less-btn');
+
+    viewMoreBtn.addEventListener('click', function() {
+      let maxHeight = description.scrollHeight;
+      description.style.maxHeight = maxHeight + 'px'; // Expand to full height
+      viewMoreBtn.style.display = 'none';
+      viewLessBtn.style.display = 'inline-block';
+    });
+
+    viewLessBtn.addEventListener('click', function() {
+      description.style.maxHeight = '170px'; // Collapse to max-height
+      viewMoreBtn.style.display = 'inline-block';
+      viewLessBtn.style.display = 'none';
+    });
+  });
+</script>
+
+<style>
+  #product-description {
+    max-height: 100px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out; /* Smooth transition with ease-out timing */
+  }
+  .cus_view_more a {
+    cursor: pointer;
+  }
+  .cus_view_more {
+    position: relative;
+    top:0;
+  }
+  .cus_view_more:hover .cus_view_more:before{
+    transform: rotate(45deg);
+  }
+  .cus_view_more:before{
+    content: "";
+    position: absolute;
+    background: currentColor;
+    transition: transform .2s ease-in-out;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50px;
+    /* width: 2px;
+    height: 10px; */
+  }
+  .cus_view_more:after{
+    content: "";
+    position: absolute;
+    background: currentColor;
+    transition: transform .2s ease-in-out;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50px;
+    /* width: 10px;
+    height: 2px; */
+  }
+  #view-more-less {
+    margin-top: 10px; /* Increased margin for spacing */
+  }
+   #view-more-less a {
+    color: #F9966B;
+}
+  /* Animation keyframes for fading effect */
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* Apply animation to buttons */
+  #view-more-less a {
+    animation: fadeInOut 0.8s ease;
+  }
+  @media only screen and (min-width: 768px) {
+  .cus_view_more {
+    padding-inline: 50px;
+  }
+  }
+</style>
+  
+  
+  {% schema %}
+  {
+      "name": "View more",
+      "settings": [ ],
+     "presets": [
+        {
+          "name": "View More"
+        }
+      ]
+  }
+  {% endschema %}
