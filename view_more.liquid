@@ -1,11 +1,11 @@
 {% if collection.description != blank %}
-<div id="product-description" class="page-width" style="max-height: 170px; overflow: hidden;">
+<div id="product-description" class="page-width cus_collect_desc" style="max-height: 170px; overflow: hidden;">
   <h2 class="title h2">{{ collection.title }}</h2>
   {{ collection.description }}
 </div>
 <div id="view-more-less" class="page-width cus_view_more">
   <a id="view-more-btn">View More</a>
-  <a id="view-less-btn" style="display: none;">View Less</a>
+  <a id="view-less-btn" style="display: none;" href="#MainContent">View Less</a>
 </div>
 {% endif %}
 
@@ -17,21 +17,24 @@
 
     viewMoreBtn.addEventListener('click', function() {
       let maxHeight = description.scrollHeight;
-      description.style.maxHeight = maxHeight + 'px'; // Expand to full height
+      description.style.maxHeight = '100%'; // Expand to full height
       viewMoreBtn.style.display = 'none';
       viewLessBtn.style.display = 'inline-block';
+      description.classList.remove("cus_collect_desc");
     });
 
     viewLessBtn.addEventListener('click', function() {
       description.style.maxHeight = '170px'; // Collapse to max-height
       viewMoreBtn.style.display = 'inline-block';
       viewLessBtn.style.display = 'none';
+      description.classList.add("cus_collect_desc");
     });
   });
 </script>
 
 <style>
   #product-description {
+    position: relative;
     max-height: 100px;
     overflow: hidden;
     transition: max-height 0.3s ease-out; /* Smooth transition with ease-out timing */
@@ -69,10 +72,11 @@
     height: 2px; */
   }
   #view-more-less {
-    margin-top: 10px; /* Increased margin for spacing */
+    margin-top: 10px; 
   }
    #view-more-less a {
     color: #F9966B;
+    text-decoration: none;
 }
   /* Animation keyframes for fading effect */
   @keyframes fadeInOut {
