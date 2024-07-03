@@ -1,0 +1,46 @@
+First Step: Add Schema Code in Section File:
+Add the following schema code after "settings": [ in that section for e.g rich-text.liquid:
+
+{
+      "type":"checkbox",
+      "id":"enable-background",
+      "label": "Enable Background Image"
+      },
+    {
+      "type":"image_picker",
+      "id":"enable-background-image",
+      "label": "Select Background Image"
+      },
+
+Second Step: Add CSS Code:
+Add the following code after {%- style -%}
+
+{% if section.settings.enable-background %}
+    .add-background-{{ section.id }}{
+      background-image: url({{ section.settings.enable-background-image | img_url: 'master' | width: 1440, height: 600 }});
+        background-size: cover;
+        background-position: center center;
+        background-attachment: local;
+    }
+  {% endif %}
+
+Third Step: Add Class
+Search for name of the section for e.g “rich-text” and add below code right before that:
+
+{% if section.settings.enable-background %}add-background-{{ section.id }} {% endif %}
+
+=====================================================================================
+
+Simple Way:
+Just find the section ID and Class with Inspect Element like below screenshot:
+
+And add the following CSS code:
+
+#section-id .section-class{
+      background-image: url('/your-image-url.jpg');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: local;
+    }
+
+Make sure to replace section-id and section-class with what you copied from Inspect Element shown above in screenshot
