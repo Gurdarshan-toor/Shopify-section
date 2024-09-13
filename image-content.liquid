@@ -1,0 +1,558 @@
+<section class="content-section section-{{ section.id }}-padding" style="background-color:{{section.settings.color_accent}}">
+    <div class="page-width image_content_container ">
+        {% if section.settings.heading_section !=blank %}
+            <div class="title_container">
+                <h2 class="title inline-richtext h1" >{{ section.settings.heading_section }}</h2>
+            </div>
+        {% endif %}
+
+        {% if section.settings.cus_rich !=blank %}
+            <div class="cus_para">
+                {{ section.settings.cus_rich }}
+            </div>
+        {% endif %}
+
+        <div class="text_img_container">
+            {% for block in section.blocks %}
+
+                {%- case block.type -%}
+                    {%- when 'text' -%}
+                        <div class="text_container">
+                            <style>
+                                .features_wrapper-1-{{ block.id }}::after { bottom: {{ block.settings.v_position1 }}% ; right: {{ block.settings.h_position1 }}% ; transform: rotate( {{ block.settings.rotation1 }}deg); }
+                                .features_wrapper-2-{{ block.id }}::after { bottom: {{ block.settings.v_position2 }}% ; right: {{ block.settings.h_position2 }}% ; transform: rotate( {{ block.settings.rotation2 }}deg); }
+                                .features_wrapper-3-{{ block.id }}::after { bottom: {{ block.settings.v_position3 }}% ; right: {{ block.settings.h_position3 }}% ; transform: rotate( {{ block.settings.rotation3 }}deg); }
+                                .features_wrapper-4-{{ block.id }}::after { bottom: {{ block.settings.v_position4 }}% ; right: {{ block.settings.h_position4 }}% ; transform: rotate( {{ block.settings.rotation4 }}deg); }
+                            </style>
+                            {% if block.settings.text_logo_image != blank or block.settings.heading !=blank or block.settings.subtext !=blank%}
+                                <div class="features_wrapper features_wrapper-{{ section.id }} features_wrapper-1-{{ block.id }}">
+                                    {% if block.settings.text_logo_image != blank %}
+                                        <div class="icon_wrapper">
+                                            <img src="{{ block.settings.text_logo_image |  img_url: 'master' }}" alt="">
+                                        </div>
+                                    {% endif %}
+                                    {% if block.settings.heading !=blank %}
+                                        <h2>{{ block.settings.heading }}</h2>
+                                    {% endif %}
+                                    {% if block.settings.subtext !=blank %}
+                                    {{ block.settings.subtext }}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            {% if block.settings.text_logo_image1 != blank or block.settings.heading1 !=blank or block.settings.subtext1 !=blank%}
+                                <div class="features_wrapper features_wrapper-{{ section.id }} features_wrapper-2-{{ block.id }}">
+                                    {% if block.settings.text_logo_image1 != blank %}
+                                        <div class="icon_wrapper">
+                                            <img src="{{ block.settings.text_logo_image1 |  img_url: 'master' }}" alt="">
+                                        </div>
+                                    {% endif %}
+                                    {% if block.settings.heading1 !=blank %}
+                                        <h2>{{ block.settings.heading1 }}</h2>
+                                    {% endif %}
+                                    {% if block.settings.subtext1 !=blank %}
+                                    {{ block.settings.subtext1 }}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            {% if block.settings.text_logo_image2 != blank or block.settings.heading2 !=blank or block.settings.subtext2 !=blank%}
+                                <div class="features_wrapper features_wrapper-{{ section.id }} features_wrapper-3-{{ block.id }}">
+                                    {% if block.settings.text_logo_image2 != blank %}
+                                        <div class="icon_wrapper">
+                                            <img src="{{ block.settings.text_logo_image2 |  img_url: 'master' }}" alt="">
+                                        </div>
+                                    {% endif %}
+                                    {% if block.settings.heading2 !=blank %}
+                                        <h2>{{ block.settings.heading2 }}</h2>
+                                    {% endif %}
+                                    {% if block.settings.subtext2 !=blank %}
+                                        {{ block.settings.subtext2 }}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            {% if block.settings.text_logo_image3 != blank or block.settings.heading3 !=blank or block.settings.subtext3 !=blank%}
+                                <div class="features_wrapper features_wrapper-{{ section.id }} features_wrapper-4-{{ block.id }}">
+                                    {% if block.settings.text_logo_image3 != blank %}
+                                        <div class="icon_wrapper">
+                                            <img src="{{ block.settings.text_logo_image3 |  img_url: 'master' }}" alt="">
+                                        </div>
+                                    {% endif %}
+                                    {% if block.settings.heading3 !=blank %}
+                                        <h2>{{ block.settings.heading3 }}</h2>
+                                    {% endif %}
+                                    {% if block.settings.subtext3 !=blank %}
+                                        {{ block.settings.subtext3 }}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                
+                    {%- when 'image' -%}
+                        {% if block.settings.logo_image != blank %}
+                            <div class="img_container">
+                                <div class="img_wrapper">
+                                    <img class="vert-move" src="{{ block.settings.logo_image |  img_url: 'master' }}" alt="">
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% when 'button' %}
+                        {% if block.settings.btn_label %}
+                            <div class="btn_wrapper">
+                                <a href="{{ block.settings.btn_link }}" class="button button--secondary btn--no_hover">{{ block.settings.btn_label }}</a>
+                            </div>
+                        {% endif %}
+                    
+                {% endcase %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<style>
+    .title_container{
+            font-size: 50px;
+            margin-bottom: 15px;
+    }
+    .title_container {
+        text-align: center;
+    }
+    .cus_para {
+        text-align: center;
+    }
+    section.content-section {
+        margin-inline: 0;
+        padding-inline: 50px;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+    }
+
+    .img_wrapper img {
+        height:100%;
+        width: 100%;
+        display: block;
+        object-fit:contain;
+    }
+
+    .text_container {
+        flex: 1;
+    }
+    
+    .text_img_container .img_wrapper {
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+    
+
+    .features_wrapper p {
+        font-size: 16px;
+        width: 100%;
+        margin: auto;
+        line-height: 20px;
+        color: #121212;
+    }
+    .icon_wrapper img {
+        height: 100%;
+        width: 100%;
+        display: block;
+        max-width: 50px;
+        margin: auto;
+    }
+
+    .features_wrapper {
+        text-align: center;
+        position: relative;
+    }
+
+    
+
+    .image_content_container {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .text_container{
+        /* border: 1px solid green; */
+        width:100%;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        gap: 3rem;
+    }
+
+    .features_wrapper h2 {
+        font-size: 22px;
+    }
+
+    .title_container h2 {
+        margin-top: 0;
+    }
+
+    .img_container{
+        width:100%;
+        padding: 10px;
+    }
+
+    .img_rapper{
+        width: 100%;
+        height: 100%;
+        /* border: 5px solid palevioletred; */
+    }
+    .img_rapper img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .features_rapper{
+        padding: 20px;
+        /* border: 2px solid purple; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .features_rapper h2{
+        margin: 10px 0px;
+    }
+    .icon_raper{
+        width: 10%;
+        /* border: 2px solid orange; */
+    }
+    .icon_raper img{
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .btn_wrapper{
+        display: flex;
+        justify-content: center;
+        grid-column: -2/-3;
+        margin-top: 40px;
+    }
+    .btn_wrapper a.button{
+        font-weight: 400;
+        font-size: 16px;
+    }
+    .btn--no_hover:hover, .btn--no_hover:focus, .btn--no_hover:active{
+        color: inherit;
+    }
+    .button--secondary.btn--no_hover:hover {
+        background-color: #000;
+        color: #fff !important;
+    }
+
+    img.vert-move {
+        -webkit-animation: mover 1s infinite  alternate;
+        animation: mover 1s infinite  alternate;
+    }
+    img.vert-move {
+        -webkit-animation: mover 1s infinite  alternate;
+        animation: mover 1s infinite  alternate;
+    }
+    .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    @-webkit-keyframes mover {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-10px); }
+    }
+    @keyframes mover {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-10px); }
+    }
+
+    @media only screen and (min-width: 992px) {
+        .text_img_container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding-top: 50px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        {% if section.settings.show_lines %}
+            .features_wrapper-{{ section.id }}::after{
+                content: '';
+                position: absolute;
+                width: 30%;
+                height: 2px;
+                background: #000;
+            }
+        {% endif %}
+    }
+</style>
+
+{%- schema -%}
+    {
+        "name": "image content",
+         "settings": [
+            {
+                "type": "checkbox",
+                "id": "show_lines",
+                "label": "Show Lines on each Block",
+                "default": false
+            },
+            {
+                "type": "text",
+                "id": "heading_section",
+                "label": "Heading"
+            },
+            {
+                "type": "richtext",
+                "id": "cus_rich",
+                "label": "paragraph"
+            },
+            {
+                "type": "color",
+                "id": "color_accent",
+                "label": "Background color",
+                "default": "#FFFFFF"
+            },
+            { 
+                "type": "range",
+                "id": "padding_top",
+                "min": 0,
+                "max": 100,
+                "step": 4,
+                "unit": "px",
+                "label": "Padding top",
+                "default": 40
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "min": 0,
+                "max": 100,
+                "step": 4,
+                "unit": "px",
+                "label": "Padding bottom",
+                "default": 52
+            }
+        ],
+        "blocks": [
+            {
+                "name": "image",
+                "type": "image",
+                "settings": [
+                        {
+                            "type": "image_picker",
+                            "id": "logo_image",
+                            "label": "Logo image"
+                        }
+                ]
+            },
+            {
+                "type": "text",
+                "name": "text",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "text_logo_image",
+                        "label": "text image"
+                    },
+                    {
+                        "type": "text",
+                        "id": "heading",
+                        "default": "Heading",
+                        "label": "Heading"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "subtext",
+                        "label": "content"
+                    },
+                    { 
+                        "type": "range",
+                        "id": "v_position1",
+                        "min": -100,
+                        "max": 100,
+                        "step": 2,
+                        "unit": "%",
+                        "label": "Vertical Position 1",
+                        "default": 0
+                    },
+                    { 
+                        "type": "range",
+                        "id": "h_position1",
+                        "min": -100,
+                        "max": 100,
+                        "step": 2,
+                        "unit": "%",
+                        "label": "Horizontal Position 1",
+                        "default": 0
+                    },
+                    { 
+                        "type": "range",
+                        "id": "rotation1",
+                        "min": 0,
+                        "max": 360,
+                        "step": 4,
+                        "unit": "deg",
+                        "label": "Vertical Position 1",
+                        "default": 0
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "text_logo_image1",
+                        "label": "text image"
+                    },
+                    {
+                        "type": "text",
+                        "id": "heading1",
+                        "default": "Heading",
+                        "label": "Heading"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "subtext1",
+                        "label": "content"
+                    },
+                    { 
+                        "type": "range",
+                        "id": "v_position2",
+                        "min": -100,
+                        "max": 100,
+                        "step": 2,
+                        "unit": "%",
+                        "label": "Vertical Position 2",
+                        "default": 0
+                    },
+                    { 
+                        "type": "range",
+                        "id": "h_position2",
+                        "min": -100,
+                        "max": 100,
+                        "step": 2,
+                        "unit": "%",
+                        "label": "Horizontal Position 2",
+                        "default": 0
+                    },
+                    { 
+                        "type": "range",
+                        "id": "rotation2",
+                        "min": 0,
+                        "max": 360,
+                        "step": 4,
+                        "unit": "deg",
+                        "label": "Vertical Position 2",
+                        "default": 0
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "text_logo_image2",
+                        "label": "text image"
+                    },
+                    {
+                        "type": "text",
+                        "id": "heading2",
+                        "default": "Heading",
+                        "label": "Heading"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "subtext2",
+                        "label": "content"
+                    },
+                    { 
+                        "type": "range",
+                        "id": "v_position3",
+                        "min": -100,
+                        "max": 100,
+                        "step": 2,
+                        "unit": "%",
+                        "label": "Vertical Position 3",
+                        "default": 0
+                    },
+                    { 
+                        "type": "range",
+                        "id": "h_position3",
+                        "min": -100,
+                        "max": 100,
+                        "step": 2,
+                        "unit": "%",
+                        "label": "Horizontal Position 3",
+                        "default": 0
+                    },
+                    { 
+                        "type": "range",
+                        "id": "rotation3",
+                        "min": 0,
+                        "max": 360,
+                        "step": 4,
+                        "unit": "deg",
+                        "label": "Vertical Position 3",
+                        "default": 0
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "text_logo_image3",
+                        "label": "text image"
+                    },
+                    {
+                        "type": "text",
+                        "id": "heading3",
+                        "default": "Heading",
+                        "label": "Heading"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "subtext3",
+                        "label": "content"
+                    },
+                    { 
+                        "type": "range",
+                        "id": "v_position4",
+                        "min": -100,
+                        "max": 100,
+                        "step": 2,
+                        "unit": "%",
+                        "label": "Vertical Position 4",
+                        "default": 0
+                    },
+                    { 
+                        "type": "range",
+                        "id": "h_position4",
+                        "min": -100,
+                        "max": 100,
+                        "step": 2,
+                        "unit": "%",
+                        "label": "Horizontal Position 4",
+                        "default": 0
+                    },
+                    { 
+                        "type": "range",
+                        "id": "rotation4",
+                        "min": 0,
+                        "max": 360,
+                        "step": 4,
+                        "unit": "deg",
+                        "label": "Vertical Position 4",
+                        "default": 0
+                    }
+                ]
+            },
+            {
+                "type": "button",
+                "name": "Button",
+                "settings": [
+                    {
+                        "type": "inline_richtext",
+                        "id": "btn_label",
+                        "label": "Button Label"
+                    },
+                    {
+                        "type": "url",
+                        "id": "btn_link",
+                        "label": "Button Link"
+                    }
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "image-content"
+            } 
+        ]
+    }
+{%- endschema -%}
