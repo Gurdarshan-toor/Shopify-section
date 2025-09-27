@@ -565,3 +565,66 @@ CSS Changes:
 }
 {% endschema %}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+{%- capture tji_video_with_text_css -%}
+  <style>
+    #tji-{{ section.id }} {background: {{ section.settings.sec_bg_color }};}
+    #tji-{{ section.id }} .tji-page-with {max-width: {{ section.settings.section_max_width }}px; width: 100%; padding: 0 20px; margin: 0 auto; }
+    #tji-{{ section.id }}.tji-video-with-txt{padding:{{section.settings.padding_top}}px 0 {{section.settings.padding_bottom}}px 0;} 
+    #tji-{{ section.id }} .tji-button { font-size: 16px; line-height: 1.65;background: {{section.settings.btn_bg_color}}; color: {{section.settings.btn_text_color}}; padding: 6px 20px; min-width: 140px; display: inline-block; border:1px solid {{section.settings.btn_border_color}};border-radius: {{section.settings.border_radius}}px;text-align: center; cursor:pointer;}
+    #tji-{{ section.id }} .tji-button:hover{background: {{section.settings.btn_hover_bg_color}};color: {{section.settings.btn_hover_text_color}};border:1px solid {{section.settings.btn_hover_border_color}};box-shadow: 0 0 5px 0px {{section.settings.outline_btn_shadow_color}};} 
+    #tji-{{ section.id }} .tji-button.tji-button-outline {color: {{section.settings.outline_btn_text_color}};border-color: {{section.settings.outline_btn_text_color}};background: transparent;}
+    #tji-{{ section.id }} .tji-video-with-txt-heading {font-weight: 500;margin: 0 0 20px;font-size: {{ section.settings.title_font_size }}px;color: {{ section.settings.title_color }};}
+    #tji-{{ section.id }} .tji-video-with-txt-grid {display: flex; flex-wrap:wrap;background: {{section.settings.bg_color}};gap:20px;border-radius: {{ section.settings.section_border_radius }}px;overflow: hidden; }
+    #tji-{{ section.id }} .tji-video-with-txt-grid.tji-video-with-txt-left-media{flex-direction: row;}
+    #tji-{{ section.id }} .tji-video-with-txt-grid.tji-video-with-txt-right-media{flex-direction: row-reverse;}     
+    #tji-{{ section.id }} .tji-video-with-txt-text p {line-height: 1.5;margin:0 0 25px;font-size: {{ section.settings.content_font_size }}px;color: {{ section.settings.content_color }};}
+    #tji-{{ section.id }} .tji-video-with-txt-video {flex: 0 0 50%;position: relative;} 
+    #tji-{{ section.id }} .tji-video-with-txt-video video{position: absolute;top: 0;left: 0;right: 0;bottom: 0;width: 100%;height: 100%;object-fit: cover;object-position: center;}
+  
+    #tji-{{ section.id }} .tji-video-with-txt-video svg {position: absolute;top: calc(50% - 25px);left: calc(50% - 25px);cursor: pointer;transition: all .5s;visibility: hidden;opacity: 0;filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.25));width: 50px;height: 50px;}
+    #tji-{{ section.id }} .tji-video-with-txt-video .tji-pause-button.tji-active-btn {opacity: 1;visibility: visible;}
+    #tji-{{ section.id }} .tji-video-with-txt-video:hover .tji-play-button.tji-active-btn {opacity: 1;visibility: visible;}
+    
+    #tji-{{ section.id }} .tji-video-with-txt-video.tji-empty-img {background: grey;opacity: 0.3;}    
+    #tji-{{ section.id }} .tji-video-with-txt-content {flex:0 0 calc(50% - 20px);display: flex; padding: 0 20px;} 
+    #tji-{{ section.id }} .tji-video-with-txt-content.tji-video-with-txt-content-middle{align-items: center;} 
+    #tji-{{ section.id }} .tji-video-with-txt-content.tji-video-with-txt-content-top{align-items: flex-start;}  
+    #tji-{{ section.id }} .tji-video-with-txt-content.tji-video-with-txt-content-bottom{align-items: flex-end;}
+    #tji-{{ section.id }} .tji-video-with-txt-content-in.tji-video-with-txt-align-center {text-align: center;}
+    #tji-{{ section.id }} .tji-video-with-txt-content-in.tji-video-with-txt-align-left {text-align: left;} 
+    #tji-{{ section.id }} .tji-video-with-txt-content-in.tji-video-with-txt-align-right {text-align: right;}
+  
+    #tji-{{ section.id }} .tji-video-with-txt-video.tji-img-small {padding-bottom: 38%;}  
+    #tji-{{ section.id }} .tji-video-with-txt-video.tji-img-medium {padding-bottom: 44%;}  
+    #tji-{{ section.id }} .tji-video-with-txt-video.tji-img-large {padding-bottom: 50%;}    
+    #tji-{{ section.id }} .tji-video-with-txt-video.tji-img-adapt {padding-bottom: unset;}  
+    #tji-{{ section.id }} .tji-video-with-txt-video.tji-img-adapt video {position:relative;}  
+    
+    @media only screen and (max-width: 767px){
+      #tji-{{ section.id }}.tji-video-with-txt{padding:{{section.settings.mob_padding_top}}px 0 {{section.settings.mob_padding_bottom}}px 0;} 
+      #tji-{{ section.id }} .tji-video-with-txt-video {flex: 0 0 100%;}
+      #tji-{{ section.id }} .tji-video-with-txt-content {flex: 0 0 100%;padding:20px;}   
+      #tji-{{ section.id }} .tji-video-with-txt-heading {margin: 0 0 10px;font-size: 26px;}    
+      #tji-{{ section.id }} .tji-video-with-txt-text p{font-size: 14px;margin:0 0 15px;}  
+      #tji-{{ section.id }} .tji-video-with-txt-grid{gap:0;} 
+      #tji-{{ section.id }} .tji-video-with-txt-video.tji-img-large {padding-bottom: 120%;}  
+      #tji-{{ section.id }} .tji-video-with-txt-video.tji-img-medium {padding-bottom: 100%;}  
+      #tji-{{ section.id }} .tji-video-with-txt-video.tji-img-small {padding-bottom: 80%;}        
+      #tji-{{ section.id }} .tji-button { font-size: 15px;}
+      #tji-{{ section.id }} .tji-video-with-txt-video svg {width: 40px;height: 40px;}
+    }
+  </style> 
+{%- endcapture -%}
+{{- tji_video_with_text_css | strip_newlines -}}
+
+<div id="tji-{{ section.id }}" class="tji-video-with-txt">
+  <div class="tji-page-with">
+    <div class="tji-video-with-txt-grid tji-video-with-txt-{{ section.settings.image_align }}-media">
+      <div class="tji-video-with-txt-video tji-img-{{ section.settings.image_size }}">
+        ...
+      </div>
+    </div>
+  </div>
+</div>
+
