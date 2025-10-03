@@ -1,0 +1,471 @@
+<style>
+  #shopify-section-{{ section.id }} .tji-video-section * {
+    margin: 0px;
+  }
+  #shopify-section-{{ section.id }} .tji-video-section {
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #shopify-section-{{ section.id }} .tji-first_main_heading.tji-section-container {
+    text-align: {{ section.settings.heading_alignment }};
+    padding-left: 35px;
+    padding-right: 80px;
+  }
+  #shopify-section-{{ section.id }} .tji-section-container {
+    display: flex;
+    flex-direction: column;
+    max-width: {% if section.settings.enable_full_width %}100%{% else %}{{ section.settings.section_width }}px{% endif %};
+    margin: auto;
+  }
+  #shopify-section-{{ section.id }} .tji_v_m_t_video_with_text {
+    display: flex;
+    gap: 25px;
+  }
+  #shopify-section-{{ section.id }} .tji-video-container iframe[src*="youtube.com"] {
+    height: 35vh; 
+    max-height: 600px; 
+  }
+  #shopify-section-{{ section.id }} .tji-block-item {
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+  }
+   {% for block in section.blocks %}
+    #shopify-section-{{ section.id }} .tji-text-container[data-block-id="{{ block.id }}"] {
+      text-align: {{ block.settings.text_horizontal_alignment }};
+    }
+  {% endfor %}
+  #shopify-section-{{ section.id }} .tji-video-container,
+  #shopify-section-{{ section.id }} .tji-text-container {
+    height: 100%;
+    position: relative;
+    width: 50%;
+    line-height: 1.2;
+    padding: 10px 0px;
+  }
+  #shopify-section-{{ section.id }} .tji-video-container video {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+  }
+  #shopify-section-{{ section.id }} .tji-text-container a.tji-button::after {
+    box-shadow: none;
+  }
+  #shopify-section-{{ section.id }} .tji-button.outlined {
+    border: 2px solid #000;
+    background-color: transparent;
+    color: #000;
+    padding: 10px 20px;
+    text-align: center;
+  }
+  #shopify-section-{{ section.id }} .tji-button.outlined:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  {% for block in section.blocks %}
+    #shopify-section-{{ section.id }} .tji-video_with-text button {
+      display: {% if block.settings.button_label == blank %}none{% else %}inline-block{% endif %};
+    }
+  {% endfor %}
+  #shopify-section-{{ section.id }} .tji-text-container p {
+    line-height: 1.2;
+    padding: 10px 0px;
+  }
+  #shopify-section-{{ section.id }} .tji-playbutton-svg-wrapper {
+    display: block;
+    width: 50px;
+    height: 50px;
+  }
+  #shopify-section-{{ section.id }} .tji-play-button-deferred-media__poster-button.motion-reduce {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+  #shopify-section-{{ section.id }} .tji-hero-video-bg {
+    width: 100%;
+    max-height: 75vh;
+    object-fit: cover;
+  }
+  #shopify-section-{{ section.id }} .tji-video-container.small video {
+    height: 30vh;
+    max-height: 350px;
+    object-fit: cover;
+  }
+  #shopify-section-{{ section.id }} .tji-video-container.medium video {
+    height: 40vh;
+    max-height: 450px;
+    object-fit: cover;
+  }
+  #shopify-section-{{ section.id }} .tji-video-container.large video {
+    height: 50vh;
+    max-height: 600px;
+    object-fit: cover;
+  }
+  #shopify-section-{{ section.id }} .tji-video-container.auto video {
+    height: auto;
+    max-height: 100%;
+  }
+  #shopify-section-{{ section.id }} .tji_v_w_t_video_image {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  @media screen and (min-width: 769px) {
+    {% for block in section.blocks %}
+      #shopify-section-{{ section.id }} .tji-block-item:nth-child({{ forloop.index }}) {
+        flex-direction: {% if block.settings.media_alignment == 'left' %} row {% elsif block.settings.media_alignment == 'right' %} row-reverse {% else %} row {% endif %};
+      }
+    {% endfor %}
+  }
+
+  @media only screen and (max-width: 768px) {
+    #shopify-section-{{ section.id }} .tji-video-section {
+      padding-top: {{ section.settings.padding_top_phone }}px;
+      padding-bottom: {{ section.settings.padding_bottom_phone }}px;
+    }
+    #shopify-section-{{ section.id }} .tji-first_main_heading.tji-section-container{
+      padding-right: 43px;
+      padding-left: 75px;
+    }
+    #shopify-section-{{ section.id }} .tji-block-item {
+      display: flex;
+      flex-direction: column;
+    }
+    #shopify-section-{{ section.id }} .tji-hero-video-bg {
+      height: 400px;
+    }
+    #shopify-section-{{ section.id }} .tji-block-item:nth-child(even) {
+      flex-direction: column;
+    }
+    #shopify-section-{{ section.id }} .tji-playbutton-svg-wrapper{
+      display: flex;
+      height: 3px;
+      width: 28px;
+      justify-content: center;
+      align-items: center;
+    }
+    #shopify-section-{{ section.id }} .tji-video-container,
+    #shopify-section-{{ section.id }} .tji-text-container {
+      width: 100%;
+      font-size: large;
+      margin-bottom: 0;
+      margin-top: auto;
+      padding: 0;
+      line-height: 1.2;
+    }
+    #shopify-section-{{ section.id }} .tji-video-container video {
+      height: auto;
+    }
+    #shopify-section-{{ section.id }} .tji-video-container iframe[src*="youtube.com"] {
+      height: 30vh; 
+      max-height: 600px; 
+    }
+    #shopify-section-{{ section.id }} .tji-video-container.small video {
+      height: 20vh;
+      max-height: 200px;
+    }
+    #shopify-section-{{ section.id }} .tji-video-container.medium video {
+      height: 25vh;
+      max-height: 300px;
+    }
+    #shopify-section-{{ section.id }} .tji-video-container.large video {
+      height: 30vh;
+      max-height: 350px;
+    }
+    #shopify-section-{{ section.id }} .tji-video-container.auto video {
+      height: auto;
+    }
+  }
+
+  @media only screen and (max-width: 430px) {
+  #shopify-section-{{ section.id }} .tji-first_main_heading.tji-section-container {
+    padding-right: 43px;
+    padding-left: 40px;
+  }
+}
+</style>
+
+<section class="tji-video-section tji_v_w_t_video_image">
+  {%- if section.settings.title != blank -%}
+    <div class="tji-first_main_heading tji-section-container">{{ section.settings.title }}</div>
+  {%- endif -%}
+  <div class="tji-video-with-text tji-box-shadow">
+    <div class="tji-section-container">
+      {% for block in section.blocks %}
+        <div class="tji_v_m_t_video_with_text tji-block-item" style=" align-items: {% if block.settings.text_vertical_alignment == 'top' %} flex-start {% elsif block.settings.text_vertical_alignment == 'center' %} center {% elsif block.settings.text_vertical_alignment == 'bottom' %} flex-end {% else %} {% endif %};">
+          <div class="tji-video-container {% if block.settings.video_size == 'small' %}small{% elsif block.settings.video_size == 'medium' %}medium{% elsif block.settings.video_size == 'large' %}large{% elsif block.settings.video_size == 'auto' %}auto{% endif %}">
+            {% if block.settings.video != blank or block.settings.add_video_url != blank %}
+              {% if block.settings.video != blank %}
+                {{ block.settings.video | video_tag: autoplay: block.settings.autoplay, loop: block.settings.loop, muted: block.settings.mute, controls: block.settings.controls, class: "tji-custom-video" }}
+              {% elsif block.settings.add_video_url != blank %}
+                {% assign video_url = block.settings.add_video_url %}
+                {% assign video_id = video_url | replace: "https://youtu.be/", "" | replace: "https://www.youtube.com/watch?v=", "" | replace: "https://www.youtube.com/embed/", "" | split: "&" | first %}
+                <iframe class="tji-hero-video-bg" 
+                  src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay={{ block.settings.autoplay | default: 0 }}&controls={{block.settings.controls | default : 0}}&mute={{ block.settings.mute | default: 0 }}&loop={{ block.settings.loop | default: 0 }}"
+                  class="tji-js-youtube"
+                  allow="autoplay; encrypted-media"
+                  allowfullscreen
+                ></iframe>
+                {% assign video_url = block.settings.add_video_url %}
+                {% if video_url contains 'vimeo' %}
+                  {% assign video_id = video_url | replace: "https://vimeo.com/", "" | replace: "https://player.vimeo.com/video/", "" | split: "&" | first %}
+                  <iframe
+                    src="https://player.vimeo.com/video/{{ video_id }}?autoplay={{ block.settings.autoplay | default: 0 }}&controls={{block.settings.controls | default : 0}}&mute={{ block.settings.mute | default: 0 }}&loop={{ block.settings.loop | default: 0 }}"
+                    class="tji-js-vimeo"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen
+                  ></iframe>
+                {% endif %}
+              {% endif %}
+            {% else %}
+              {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+              <span class="tji-play-button-deferred-media__poster-button motion-reduce">
+                <span class="tji-playbutton-svg-wrapper">
+                  {{- 'icon-play.svg' | inline_asset_content -}} 
+                </span>
+              </span>
+            {% endif %}         
+          </div>
+          <div class="tji-text-container" data-block-id="{{ block.id }}">
+            {% if block.settings.heading != blank %}
+              {{ block.settings.heading }}
+            {% endif %}
+              {{ block.settings.text }}
+
+            {% if block.settings.button_label != blank %}
+              <a href="{% if block.settings.button_link != blank %}{{ block.settings.button_link }}{% else %}#{% endif %}" class="tji-video_with-text tji-button {% if block.settings.button_outline %}outlined{% endif %}" style="border-radius: {{ block.settings.button_radius }}px;">
+                {{ block.settings.button_label }}
+              </a> 
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TJI - Video with text #1",
+  "class": "tji-section", 
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "title",
+      "default": "<h2>Video with text</h2>",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Main Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Background Color"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Section Width"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_full_width",
+      "label": "Enable Full Width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "section_width",
+      "label": "Section Width",
+      "min": 1200,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "default": 1600
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "paragraph",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_phone",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_phone",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 32
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video_block",
+      "name": "Video Block",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Upload your video here"
+        },
+        {
+          "type": "video_url",
+          "id": "add_video_url",
+          "label": "Video URL",
+          "accept": [
+            "youtube",
+            "vimeo"
+          ]
+        },
+        {
+          "type": "select",
+          "id": "video_size",
+          "label": "Video Height",
+          "options": [
+            { "value": "small", "label": "Small" },
+            { "value": "medium", "label": "medium" },
+            { "value": "large", "label": "Large" },
+            { "value": "auto", "label": "auto" }
+          ],
+          "default": "large"
+        },
+        {
+          "type": "select",
+          "id": "media_alignment",
+          "label": "Media Alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "checkbox",
+          "id": "autoplay",
+          "label": "Autoplay",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "loop",
+          "label": "Loop Video",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "mute",
+          "label": "Mute Video",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "controls",
+          "label": "Show Video Controls",
+          "default": true
+        },
+        {
+          "type": "richtext",
+          "id": "heading",
+          "default": "<h2>Transform Your Experience with Our Innovative Solutions</h2>",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Discover how our cutting-edge technology can revolutionize your workflow. Watch the video to see it in action!</p>",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Learn More",
+          "label": "Button Label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "select",
+          "id": "text_vertical_alignment",
+          "label": "Text Vertical Alignment",
+          "options": [
+            { "value": "top", "label": "Top" },
+            { "value": "center", "label": "Center" },
+            { "value": "bottom", "label": "Bottom" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "text_horizontal_alignment",
+          "label": "Text Horizontal Alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_outline",
+          "label": "Enable Button Outline",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "button_radius",
+          "min": 1,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Rounded Button",
