@@ -1,151 +1,151 @@
 <style>
-  #shopify-section-{{ section.id }} .tji-video-section * {
+  #shopify-section-{{ section.id }} .video-section * {
     margin: 0px;
   }
-  #shopify-section-{{ section.id }} .tji-video-section {
+  #shopify-section-{{ section.id }} .video-section {
     background-color: {{ section.settings.background_color }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
-  #shopify-section-{{ section.id }} .tji-first_main_heading.tji-section-container {
+  #shopify-section-{{ section.id }} .first_main_heading.section-container {
     text-align: {{ section.settings.heading_alignment }};
     padding-left: 35px;
     padding-right: 80px;
   }
-  #shopify-section-{{ section.id }} .tji-section-container {
+  #shopify-section-{{ section.id }} .section-container {
     display: flex;
     flex-direction: column;
     max-width: {% if section.settings.enable_full_width %}100%{% else %}{{ section.settings.section_width }}px{% endif %};
     margin: auto;
   }
-  #shopify-section-{{ section.id }} .tji_v_m_t_video_with_text {
+  #shopify-section-{{ section.id }} .v_m_t_video_with_text {
     display: flex;
     gap: 25px;
   }
-  #shopify-section-{{ section.id }} .tji-video-container iframe[src*="youtube.com"] {
+  #shopify-section-{{ section.id }} .video-container iframe[src*="youtube.com"] {
     height: 35vh; 
     max-height: 600px; 
   }
-  #shopify-section-{{ section.id }} .tji-block-item {
+  #shopify-section-{{ section.id }} .block-item {
     display: flex;
     justify-content: center;
     border-radius: 8px;
   }
    {% for block in section.blocks %}
-    #shopify-section-{{ section.id }} .tji-text-container[data-block-id="{{ block.id }}"] {
+    #shopify-section-{{ section.id }} .text-container[data-block-id="{{ block.id }}"] {
       text-align: {{ block.settings.text_horizontal_alignment }};
     }
   {% endfor %}
-  #shopify-section-{{ section.id }} .tji-video-container,
-  #shopify-section-{{ section.id }} .tji-text-container {
+  #shopify-section-{{ section.id }} .video-container,
+  #shopify-section-{{ section.id }} .text-container {
     height: 100%;
     position: relative;
     width: 50%;
     line-height: 1.2;
     padding: 10px 0px;
   }
-  #shopify-section-{{ section.id }} .tji-video-container video {
+  #shopify-section-{{ section.id }} .video-container video {
     width: 100%;
     height: 100%;
     border-radius: 8px;
   }
-  #shopify-section-{{ section.id }} .tji-text-container a.tji-button::after {
+  #shopify-section-{{ section.id }} .text-container a.button::after {
     box-shadow: none;
   }
-  #shopify-section-{{ section.id }} .tji-button.outlined {
+  #shopify-section-{{ section.id }} .button.outlined {
     border: 2px solid #000;
     background-color: transparent;
     color: #000;
     padding: 10px 20px;
     text-align: center;
   }
-  #shopify-section-{{ section.id }} .tji-button.outlined:hover {
+  #shopify-section-{{ section.id }} .button.outlined:hover {
     background-color: #000;
     color: #fff;
   }
   {% for block in section.blocks %}
-    #shopify-section-{{ section.id }} .tji-video_with-text button {
+    #shopify-section-{{ section.id }} .video_with-text button {
       display: {% if block.settings.button_label == blank %}none{% else %}inline-block{% endif %};
     }
   {% endfor %}
-  #shopify-section-{{ section.id }} .tji-text-container p {
+  #shopify-section-{{ section.id }} .text-container p {
     line-height: 1.2;
     padding: 10px 0px;
   }
-  #shopify-section-{{ section.id }} .tji-playbutton-svg-wrapper {
+  #shopify-section-{{ section.id }} .playbutton-svg-wrapper {
     display: block;
     width: 50px;
     height: 50px;
   }
-  #shopify-section-{{ section.id }} .tji-play-button-deferred-media__poster-button.motion-reduce {
+  #shopify-section-{{ section.id }} .play-button-deferred-media__poster-button.motion-reduce {
     position: absolute;
     top: 50%;
     left: 50%;
   }
-  #shopify-section-{{ section.id }} .tji-hero-video-bg {
+  #shopify-section-{{ section.id }} .hero-video-bg {
     width: 100%;
     max-height: 75vh;
     object-fit: cover;
   }
-  #shopify-section-{{ section.id }} .tji-video-container.small video {
+  #shopify-section-{{ section.id }} .video-container.small video {
     height: 30vh;
     max-height: 350px;
     object-fit: cover;
   }
-  #shopify-section-{{ section.id }} .tji-video-container.medium video {
+  #shopify-section-{{ section.id }} .video-container.medium video {
     height: 40vh;
     max-height: 450px;
     object-fit: cover;
   }
-  #shopify-section-{{ section.id }} .tji-video-container.large video {
+  #shopify-section-{{ section.id }} .video-container.large video {
     height: 50vh;
     max-height: 600px;
     object-fit: cover;
   }
-  #shopify-section-{{ section.id }} .tji-video-container.auto video {
+  #shopify-section-{{ section.id }} .video-container.auto video {
     height: auto;
     max-height: 100%;
   }
-  #shopify-section-{{ section.id }} .tji_v_w_t_video_image {
+  #shopify-section-{{ section.id }} .v_w_t_video_image {
     padding-left: 20px;
     padding-right: 20px;
   }
   @media screen and (min-width: 769px) {
     {% for block in section.blocks %}
-      #shopify-section-{{ section.id }} .tji-block-item:nth-child({{ forloop.index }}) {
+      #shopify-section-{{ section.id }} .block-item:nth-child({{ forloop.index }}) {
         flex-direction: {% if block.settings.media_alignment == 'left' %} row {% elsif block.settings.media_alignment == 'right' %} row-reverse {% else %} row {% endif %};
       }
     {% endfor %}
   }
 
   @media only screen and (max-width: 768px) {
-    #shopify-section-{{ section.id }} .tji-video-section {
+    #shopify-section-{{ section.id }} .video-section {
       padding-top: {{ section.settings.padding_top_phone }}px;
       padding-bottom: {{ section.settings.padding_bottom_phone }}px;
     }
-    #shopify-section-{{ section.id }} .tji-first_main_heading.tji-section-container{
+    #shopify-section-{{ section.id }} .first_main_heading.section-container{
       padding-right: 43px;
       padding-left: 75px;
     }
-    #shopify-section-{{ section.id }} .tji-block-item {
+    #shopify-section-{{ section.id }} .block-item {
       display: flex;
       flex-direction: column;
     }
-    #shopify-section-{{ section.id }} .tji-hero-video-bg {
+    #shopify-section-{{ section.id }} .hero-video-bg {
       height: 400px;
     }
-    #shopify-section-{{ section.id }} .tji-block-item:nth-child(even) {
+    #shopify-section-{{ section.id }} .block-item:nth-child(even) {
       flex-direction: column;
     }
-    #shopify-section-{{ section.id }} .tji-playbutton-svg-wrapper{
+    #shopify-section-{{ section.id }} .playbutton-svg-wrapper{
       display: flex;
       height: 3px;
       width: 28px;
       justify-content: center;
       align-items: center;
     }
-    #shopify-section-{{ section.id }} .tji-video-container,
-    #shopify-section-{{ section.id }} .tji-text-container {
+    #shopify-section-{{ section.id }} .video-container,
+    #shopify-section-{{ section.id }} .text-container {
       width: 100%;
       font-size: large;
       margin-bottom: 0;
@@ -153,56 +153,56 @@
       padding: 0;
       line-height: 1.2;
     }
-    #shopify-section-{{ section.id }} .tji-video-container video {
+    #shopify-section-{{ section.id }} .video-container video {
       height: auto;
     }
-    #shopify-section-{{ section.id }} .tji-video-container iframe[src*="youtube.com"] {
+    #shopify-section-{{ section.id }} .video-container iframe[src*="youtube.com"] {
       height: 30vh; 
       max-height: 600px; 
     }
-    #shopify-section-{{ section.id }} .tji-video-container.small video {
+    #shopify-section-{{ section.id }} .video-container.small video {
       height: 20vh;
       max-height: 200px;
     }
-    #shopify-section-{{ section.id }} .tji-video-container.medium video {
+    #shopify-section-{{ section.id }} .video-container.medium video {
       height: 25vh;
       max-height: 300px;
     }
-    #shopify-section-{{ section.id }} .tji-video-container.large video {
+    #shopify-section-{{ section.id }} .video-container.large video {
       height: 30vh;
       max-height: 350px;
     }
-    #shopify-section-{{ section.id }} .tji-video-container.auto video {
+    #shopify-section-{{ section.id }} .video-container.auto video {
       height: auto;
     }
   }
 
   @media only screen and (max-width: 430px) {
-  #shopify-section-{{ section.id }} .tji-first_main_heading.tji-section-container {
+  #shopify-section-{{ section.id }} .first_main_heading.section-container {
     padding-right: 43px;
     padding-left: 40px;
   }
 }
 </style>
 
-<section class="tji-video-section tji_v_w_t_video_image">
+<section class="video-section v_w_t_video_image tji">
   {%- if section.settings.title != blank -%}
-    <div class="tji-first_main_heading tji-section-container">{{ section.settings.title }}</div>
+    <div class="first_main_heading section-container">{{ section.settings.title }}</div>
   {%- endif -%}
-  <div class="tji-video-with-text tji-box-shadow">
-    <div class="tji-section-container">
+  <div class="video-with-text box-shadow">
+    <div class="section-container">
       {% for block in section.blocks %}
-        <div class="tji_v_m_t_video_with_text tji-block-item" style=" align-items: {% if block.settings.text_vertical_alignment == 'top' %} flex-start {% elsif block.settings.text_vertical_alignment == 'center' %} center {% elsif block.settings.text_vertical_alignment == 'bottom' %} flex-end {% else %} {% endif %};">
-          <div class="tji-video-container {% if block.settings.video_size == 'small' %}small{% elsif block.settings.video_size == 'medium' %}medium{% elsif block.settings.video_size == 'large' %}large{% elsif block.settings.video_size == 'auto' %}auto{% endif %}">
+        <div class="v_m_t_video_with_text block-item" style=" align-items: {% if block.settings.text_vertical_alignment == 'top' %} flex-start {% elsif block.settings.text_vertical_alignment == 'center' %} center {% elsif block.settings.text_vertical_alignment == 'bottom' %} flex-end {% else %} {% endif %};">
+          <div class="video-container {% if block.settings.video_size == 'small' %}small{% elsif block.settings.video_size == 'medium' %}medium{% elsif block.settings.video_size == 'large' %}large{% elsif block.settings.video_size == 'auto' %}auto{% endif %}">
             {% if block.settings.video != blank or block.settings.add_video_url != blank %}
               {% if block.settings.video != blank %}
-                {{ block.settings.video | video_tag: autoplay: block.settings.autoplay, loop: block.settings.loop, muted: block.settings.mute, controls: block.settings.controls, class: "tji-custom-video" }}
+                {{ block.settings.video | video_tag: autoplay: block.settings.autoplay, loop: block.settings.loop, muted: block.settings.mute, controls: block.settings.controls, class: "custom-video" }}
               {% elsif block.settings.add_video_url != blank %}
                 {% assign video_url = block.settings.add_video_url %}
                 {% assign video_id = video_url | replace: "https://youtu.be/", "" | replace: "https://www.youtube.com/watch?v=", "" | replace: "https://www.youtube.com/embed/", "" | split: "&" | first %}
-                <iframe class="tji-hero-video-bg" 
+                <iframe class="hero-video-bg" 
                   src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay={{ block.settings.autoplay | default: 0 }}&controls={{block.settings.controls | default : 0}}&mute={{ block.settings.mute | default: 0 }}&loop={{ block.settings.loop | default: 0 }}"
-                  class="tji-js-youtube"
+                  class="js-youtube"
                   allow="autoplay; encrypted-media"
                   allowfullscreen
                 ></iframe>
@@ -211,7 +211,7 @@
                   {% assign video_id = video_url | replace: "https://vimeo.com/", "" | replace: "https://player.vimeo.com/video/", "" | split: "&" | first %}
                   <iframe
                     src="https://player.vimeo.com/video/{{ video_id }}?autoplay={{ block.settings.autoplay | default: 0 }}&controls={{block.settings.controls | default : 0}}&mute={{ block.settings.mute | default: 0 }}&loop={{ block.settings.loop | default: 0 }}"
-                    class="tji-js-vimeo"
+                    class="js-vimeo"
                     allow="autoplay; encrypted-media"
                     allowfullscreen
                   ></iframe>
@@ -219,21 +219,21 @@
               {% endif %}
             {% else %}
               {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
-              <span class="tji-play-button-deferred-media__poster-button motion-reduce">
-                <span class="tji-playbutton-svg-wrapper">
+              <span class="play-button-deferred-media__poster-button motion-reduce">
+                <span class="playbutton-svg-wrapper">
                   {{- 'icon-play.svg' | inline_asset_content -}} 
                 </span>
               </span>
             {% endif %}         
           </div>
-          <div class="tji-text-container" data-block-id="{{ block.id }}">
+          <div class="text-container" data-block-id="{{ block.id }}">
             {% if block.settings.heading != blank %}
               {{ block.settings.heading }}
             {% endif %}
               {{ block.settings.text }}
 
             {% if block.settings.button_label != blank %}
-              <a href="{% if block.settings.button_link != blank %}{{ block.settings.button_link }}{% else %}#{% endif %}" class="tji-video_with-text tji-button {% if block.settings.button_outline %}outlined{% endif %}" style="border-radius: {{ block.settings.button_radius }}px;">
+              <a href="{% if block.settings.button_link != blank %}{{ block.settings.button_link }}{% else %}#{% endif %}" class="video_with-text button {% if block.settings.button_outline %}outlined{% endif %}" style="border-radius: {{ block.settings.button_radius }}px;">
                 {{ block.settings.button_label }}
               </a> 
             {% endif %}
@@ -247,7 +247,7 @@
 {% schema %}
 {
   "name": "TJI - Video with text #1",
-  "class": "tji-section", 
+  "class": "section tji", 
   "settings": [
     {
       "type": "richtext",
@@ -469,3 +469,19 @@
           "step": 1,
           "unit": "px",
           "label": "Rounded Button",
+          "default": 16
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TJI - Video with text #1",
+      "blocks": [
+        {"type": "video_block"}
+      ]
+    }
+  ]
+}
+
+{% endschema %}
