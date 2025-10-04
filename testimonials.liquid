@@ -1,0 +1,365 @@
+<style>
+  #shopify-section-{{ section.id }} * {
+    margin: 0;
+    padding: 0;
+  }
+  #shopify-section-{{ section.id }} .gj-main_review_section{
+    background-color: {{ section.settings.section_bg_color }};
+  }
+  #shopify-section-{{ section.id }} .gj-review-section {
+    text-align: {{ section.settings.heading_align }};
+    padding: {{ section.settings.padding_top }}px 20px {{ section.settings.padding_bottom }}px;
+    max-width: {% if section.settings.Enable_full_width %}100%{% else %}{{ section.settings.section_width }}px{% endif %};
+    margin: auto;
+  }
+  #shopify-section-{{ section.id }} .gj-review-main-heading {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  #shopify-section-{{ section.id }} .gj-review-heading {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .gj-review-heading * {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  #shopify-section-{{ section.id }} .gj-review-heading-highlight {
+    color: #ff4d4d;
+  }
+  #shopify-section-{{ section.id }} .gj-review-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    grid-template-columns: repeat({{ section.settings.blocks_per_row }}, 1fr);
+    margin-top:20px;
+  }
+  #shopify-section-{{ section.id }} .gj-review-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    width: 300px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    width: calc(100% / {{ section.settings.blocks_per_row }} - 30px);
+  }
+
+  #shopify-section-{{ section.id }} .gj-review-item:hover {
+      transform: translateY(-5px);
+    }
+
+  #shopify-section-{{ section.id }} .gj-review-user img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+  #shopify-section-{{ section.id }} .gj-review-rating {
+      font-size: 22px;
+      color: #f5b301;
+      margin: 10px 0;
+    }
+
+  #shopify-section-{{ section.id }} .gj-review-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  #shopify-section-{{ section.id }} .gj-review-description {
+      font-size: 14px;
+      margin: 12px 0;
+      line-height: 1.5;
+    }
+
+  #shopify-section-{{ section.id }}  .gj-review-author {
+      font-size: 15px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  #shopify-section-{{ section.id }}.gj-star-rating {
+      display: inline-block;
+      direction: rtl;
+    }
+
+  #shopify-section-{{ section.id }} .gj-star-rating input {
+      display: none;
+    }
+
+  #shopify-section-{{ section.id }} .gj-star-rating label {
+      font-size: 30px;
+      cursor: pointer;
+    }
+  #shopify-section-{{ section.id }} h2 {
+      padding-bottom: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .gj-star-rating input:checked ~ label,
+  #shopify-section-{{ section.id }} .gj-star-rating input:checked ~ label ~ label {
+      color: #f5b301;
+    }
+
+  #shopify-section-{{ section.id }} .gj-star-rating label:hover,
+  #shopify-section-{{ section.id }} .gj-star-rating label:hover ~ label {
+      color: hsl(48, 100%, 50%);
+    }
+
+  
+  @media only screen and (min-width: 767px) and (max-width: 1024px) {
+    #shopify-section-{{ section.id }} .gj-review-container {
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .gj-review-item {
+      width: calc(50% - 20px);
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    #shopify-section-{{ section.id }} .gj-review-section {
+      padding-top: {{ section.settings.padding_top_phone }}px;
+      padding-bottom: {{ section.settings.padding_bottom_phone }}px;
+    }
+
+    #shopify-section-{{ section.id }} .gj-review-container {
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .gj-review-item {
+      width: calc(100% / {{ section.settings.blocks_per_row_phone }} - 50px);
+    }
+    
+    {% if section.settings.blocks_per_row_phone == 2 %}
+      #shopify-section-{{ section.id }} .gj-review-item {
+        width: calc(50% - 20px);
+      }
+    {% endif %}
+  }
+</style>
+
+<div class="gj-main_review_section">
+  <div class="gj-review-section">
+    {% if section.settings.heading != blank %}
+      {{ section.settings.heading }}
+    {% endif %}  
+    <div class="gj-review-container">
+      {% for block in section.blocks %}
+        <div class="gj-review-item">
+          <div class="gj-review-user">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | img_url: '100x100' }}"  width="100%" height="100%" alt="{{ block.settings.image.alt |  default: 'review images' }}">
+            {% else %}
+            {{ 'product-3' | placeholder_svg_tag: 'my-custom-class' }}
+            {% endif %}
+          </div>
+          <div class="gj-review-content">
+            <div class="gj-star-rating">
+              {%- assign star_count = block.settings.review_block_star | plus: 0 -%}
+              {%- for i in (1..star_count) -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" style="width: 20px; height: 20px; fill: {{ block.settings.star_color }};">
+                  <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+                </svg>
+              {%- endfor -%}
+            </div>
+            <h3 class="gj-review-title">{{ block.settings.title }}</h3>
+            <h4 class="gj-review-description">{{ block.settings.description }}</h4>
+            <h5 class="gj-review-author">{{ block.settings.author }}</h5>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Testimonial Slider",
+  "class": "gj-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<h2>Heading</h2>"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "blocks_per_row",
+      "label": "Block per Row",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "blocks_per_row_phone",
+      "label": "Blocks per Row (Mobile)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Section Width"
+    },
+    {
+      "type": "checkbox",
+      "id": "Enable_full_width",
+      "label": "Enable Full Width", 
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "section_width",
+      "label": "Section Width",
+      "min": 1200,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "default": 1300
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "paragraph",
+      "content": "Desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 52
+    },
+    {
+      "type": "paragraph",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_phone",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_phone",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 32
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Reviewer Image"
+        },
+        {
+          "type": "range",
+          "id": "review_block_star",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "label": "Number of stars",
+          "default": 5
+        },
+        {
+          "type": "color",
+          "id": "star_color",
+          "label": "Star Color",
+          "default": "#f5b301"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review Title",
+          "default": "Add block"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Review Description",
+          "default": "This program completely changed my approach to business!"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Reviewer Name",
+          "default": "Reviewer name"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonial Slider",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}
