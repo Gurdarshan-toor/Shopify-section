@@ -1,0 +1,352 @@
+<div class="announcement-countdown-bar-v2" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
+  <div class="page-width">
+    <div class="bar-content-wrapper-v2">
+      <div class="bar-content-left-v2" style="max-width: {{ section.settings.image_max_width }}px;">
+        {% if section.settings.left_image != blank %}
+          <img 
+            src="{{ section.settings.left_image | image_url: width: 400 }}" 
+            alt="{{ section.settings.main_text | escape }}" 
+            class="bar-left-image"
+            style="max-width: {{ section.settings.image_max_width }}px; height: auto;"
+            loading="lazy"
+          >
+        {% else %}
+          {% if section.settings.main_text != blank %}
+            <span class="bar-text-main-v2">{{ section.settings.main_text | escape }}</span>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      <div class="bar-text-center-v2">
+        {% if section.settings.secondary_text != blank %}
+          <span class="bar-text-secondary-v2">{{ section.settings.secondary_text | escape }}</span>
+        {% endif %}
+      </div>
+
+      <div class="bar-countdown-timer-v2 countdown-timera" 
+           data-countdown-section 
+           data-end-time="{{ section.settings.countdown_end | escape }}"
+           style="visibility: hidden;">
+        
+        <div class="countdown-unit-wrapper">
+          
+          <div class="countdown-item">
+            <span class="hours">48</span>
+            <div class="countdown-label">Hrs</div>
+          </div>
+          <div class="timer-separator-v2">:</div>
+          
+          <div class="countdown-item">
+            <span class="minutes">00</span>
+            <div class="countdown-label">Mins</div>
+          </div>
+          <div class="timer-separator-v2">:</div>
+          
+          <div class="countdown-item">
+            <span class="seconds">00</span>
+            <div class="countdown-label">Secs</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .announcement-countdown-bar-v2 {
+    padding: 10px 100px;
+    font-family: sans-serif;
+  }
+  .bar-content-wrapper-v2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+    position: relative;
+  }
+  
+  .bar-content-left-v2 {
+    flex-shrink: 0; 
+  }
+
+  .bar-left-image {
+    display: block;
+    width: 100%;
+  }
+
+  .bar-countdown-timer-v2 {
+    flex-shrink: 0; 
+  }
+  
+
+  .bar-text-center-v2 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .bar-text-main-v2 {
+    font-family: serif;
+    font-style: italic;
+    font-size: 50px;
+    font-weight: 300;
+    line-height: 1;
+  }
+  .bar-text-secondary-v2 {
+    font-size: 48px; 
+    font-weight: 700;
+  }
+
+  .bar-countdown-timer-v2 {
+    display: flex;
+    align-items: center;
+  }
+  .countdown-unit-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+  }
+  .countdown-item {
+    text-align: center;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70px; /* Adjusted for larger font size */
+  }
+  
+  .countdown-item span, 
+  .countdown-label 
+  {
+    display: block;
+    font-weight: 700;
+    color: inherit; 
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    /* FIX: Monospaced font for consistent width */
+    font-family: 'Courier New', Courier, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  
+  .countdown-item span {
+    font-size: 54px; 
+    width: 100%; /* Ensure full width usage */
+    text-align: center;
+  }
+  .countdown-label {
+    font-size: 24px; 
+    margin-top: 2px;
+    width: 100%; /* Ensure full width usage */
+    text-align: center;
+  }
+  
+  .timer-separator-v2 {
+    font-size: 54px;
+    font-weight: 700;
+    padding: 0 5px;
+    line-height: 1;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    /* FIX: Consistent height */
+    display: flex;
+    align-items: center;
+    height: 54px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .bar-content-wrapper-v2 {
+      gap: 15px;
+      padding: 15px 0;
+    }
+    
+    .bar-text-center-v2 {
+      position: static; /* Reset for mobile */
+      transform: none;
+      order: 2;
+      pointer-events: auto;
+    }
+    
+    .bar-content-left-v2 {
+      max-width: 100% !important;
+      order: 1;
+    }
+    
+    .bar-countdown-timer-v2 {
+        order: 3;
+    }
+    
+    .bar-text-main-v2 {
+      font-size: 36px;
+    }
+    .bar-text-secondary-v2 {
+      font-size: 26px;
+    }
+    
+    .countdown-item {
+      width: 50px; /* Adjusted for mobile */
+    }
+    
+    .countdown-item span {
+      font-size: 30px;
+    }
+    .countdown-label {
+      font-size: 12px;
+    }
+    .timer-separator-v2 {
+      font-size: 28px;
+      height: 30px;
+    }
+    
+    .announcement-countdown-bar-v2 {
+      padding: 10px;
+    }
+    .bar-content-left-v2 img {
+        width: 140px !important;
+    }
+  }
+
+  /* Additional fix for very small screens */
+  @media screen and (max-width: 480px) {
+    .countdown-item {
+      width: 42px;
+    }
+    .countdown-item span {
+      font-size: 26px;
+    }
+    .timer-separator-v2 {
+      font-size: 24px;
+      height: 26px;
+    }
+  }
+</style>
+
+<script>
+  function initCountdown(section) {
+    const endDate = new Date(section.dataset.endTime).getTime();
+
+    const hoursEl = section.querySelector('.hours');
+    const minutesEl = section.querySelector('.minutes');
+    const secondsEl = section.querySelector('.seconds');
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = endDate - now;
+
+      if (distance < 0) {
+        // Timer expired state
+        section.innerHTML = "<p style='font-size: 20px;'>Sale has ended.</p>"; 
+        clearInterval(timerInterval);
+        return;
+      }
+
+      const totalHours = Math.floor(distance / (1000 * 60 * 60)); 
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      const pad = (num) => String(num).padStart(2, '0');
+
+      hoursEl.textContent = pad(totalHours);
+      minutesEl.textContent = pad(minutes);
+      secondsEl.textContent = pad(seconds);
+      
+      // Make timer visible after first update
+      section.style.visibility = 'visible';
+    }
+
+    updateCountdown();
+    const timerInterval = setInterval(updateCountdown, 1000);
+  }
+
+  function setupCountdowns() {
+    const sections = document.querySelectorAll('[data-countdown-section]');
+    sections.forEach(initCountdown);
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupCountdowns);
+  } else {
+    setupCountdowns();
+  }
+
+  document.addEventListener('shopify:section:load', function (e) {
+    const section = e.target.querySelector('[data-countdown-section]');
+    if (section) {
+      initCountdown(section);
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Announcement Countdown",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Bar Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#F88FAB"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Left Content (Image/Text)"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left Side Image"
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Image Max Width",
+      "default": 150,
+      "info": "Controls the width of the image on the left side."
+    },
+    {
+      "type": "text",
+      "id": "main_text",
+      "label": "Fallback Text (if no image)",
+      "default": "Ownley"
+    },
+    {
+      "type": "text",
+      "id": "secondary_text",
+      "label": "Center Text (e.g., FOR)",
+      "default": "FOR"
+    },
+    {
+      "type": "header",
+      "content": "Countdown Settings"
+    },
+    {
+      "type": "text",
+      "id": "countdown_end",
+      "label": "Countdown End Date (YYYY-MM-DD HH:MM:SS)",
+      "default": "2025-10-31 23:59:59"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Countdown"
+    }
+  ]
+}
+{% endschema %}
