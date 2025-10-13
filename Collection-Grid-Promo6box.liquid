@@ -1,0 +1,157 @@
+{{ 'section-collection-grid-promo.css' | asset_url | stylesheet_tag }}
+
+<div class="page-width">
+  <div class="collection-grid-promo-wrapper">
+    
+    {%- liquid
+      assign collection_count = 0
+      assign max_blocks = 6
+    %}
+    {% for block in section.blocks %}
+      {% if block.type == 'collection' and forloop.index <= 5 %}
+        {% liquid
+          assign collection = block.settings.collection
+          assign collection_count = collection_count | plus: 1
+        %}
+        
+        <div {{ block.shopify_attributes }} class="collection-grid-item collection-grid-{{ forloop.index }}">
+          {% if collection != blank %}
+            <a href="{{ collection.url }}" class="collection-item-link">
+              <div class="collection-image-container">
+                {% if collection.image != blank %}
+                  {% assign image_url = collection.image | img_url: '450x600', crop: 'center' %}
+                {% elsif collection.products.first.featured_image != blank %}
+                  {% assign image_url = collection.products.first.featured_image | img_url: '450x600', crop: 'center' %}
+                {% else %}
+                  {% assign image_url = 'placeholder-collection.png' | asset_url %}
+                {% endif %}
+                
+                <img src="{{ image_url }}" alt="{{ collection.title | escape }}" loading="lazy">
+                
+                <div class="collection-title-bar">
+                  <h3 class="collection-title">{{ block.settings.custom_title | default: collection.title | escape }}</h3>
+                </div>
+              </div>
+            </a>
+          {% else %}
+            <div class="collection-item-link placeholder-item">
+                <div class="placeholder-svg-wrapper">
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+                <div class="collection-title-bar">
+                    <h3 class="collection-title">{{ block.settings.custom_title | default: 'Collection ' | append: forloop.index | escape }}</h3>
+                </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+    
+    <div class="collection-grid-item promotion-box-item" {{ section.blocks[5].shopify_attributes }}>
+        <div class="promotion-box" style="background-color: {{ section.settings.promo_bg_color }}; color: {{ section.settings.promo_text_color }};">
+            
+            <div class="promo-content">
+                <div class="promo_top"><h2 class="promo-text-large">{{ section.settings.promo_text_line1 | escape }}</h2></div>
+                <div class="promo_middle"><h3 class="promo-text-large">{{ section.settings.promo_text_line2 | escape }}</h3>
+                <h3 class="promo-text-large">{{ section.settings.promo_text_line3 | escape }}</h3>
+                <h3 class="promo-text-large">{{ section.settings.promo_text_line4 | escape }}</h3></div>
+            </div>
+            
+            {% if section.settings.promo_link_label != blank %}
+                <a href="{{ section.settings.promo_link }}" class="shop-all-link">
+                    {{ section.settings.promo_link_label | escape }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection Grid Promo",
+  "tag": "section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Custom Promo Box Settings"
+    },
+    {
+      "type": "color",
+      "id": "promo_bg_color",
+      "label": "Background Color",
+      "default": "#451e2a"
+    },
+    {
+      "type": "color",
+      "id": "promo_text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "promo_text_line1",
+      "label": "Line 1",
+      "default": "OWNLEY"
+    },
+    {
+      "type": "text",
+      "id": "promo_text_line2",
+      "label": "Line 2",
+      "default": "ONLINE"
+    },
+    {
+      "type": "text",
+      "id": "promo_text_line3",
+      "label": "Line 3",
+      "default": "WAREHOUSE"
+    },
+    {
+      "type": "text",
+      "id": "promo_text_line4",
+      "label": "Line 4",
+      "default": "SALE"
+    },
+    {
+      "type": "text",
+      "id": "promo_link_label",
+      "label": "Shop All Button Text",
+      "default": "Shop All"
+    },
+    {
+      "type": "url",
+      "id": "promo_link",
+      "label": "Shop All Link",
+      "default": "/collections/all"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection to display"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Link Text (e.g. Shop Skirts)",
+          "info": "Leave blank to use Collection Title."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Grid Promo",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}
