@@ -1,0 +1,239 @@
+<!-- snippets/wholesale-form.liquid -->
+<div class="wholesale-application-form page-width" id="{{ section.id }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2>{{ section.settings.heading | default: 'Wholesale Application' }}</h2>
+        <p>{{ section.settings.subheading | default: 'Apply to become a wholesale partner for Art by Abby Paffrath' }}</p>
+        
+        {% form 'contact', class: 'wholesale-form' %}
+          {% if form.posted_successfully? %}
+            <div class="alert alert-success">
+              Thank you! Your application has been submitted successfully.
+            </div>
+          {% endif %}
+
+          {% if form.errors %}
+            <div class="alert alert-error">
+              Please correct the errors below.
+            </div>
+          {% endif %}
+
+          <input type="hidden" name="contact[form_type]" value="Wholesale Application">
+          <input type="hidden" name="contact[subject]" value="New Wholesale Application for Art by Abby Paffrath">
+
+          <div class="form-grid">
+            <!-- Business Information -->
+            <div class="form-group">
+              <label for="business_name">Business Name *</label>
+              <input type="text" id="business_name" name="contact[Business Name]" required>
+            </div>
+
+            <div class="form-group">
+              <label for="tax_id">Reseller Permit / Tax ID Number *</label>
+              <input type="text" id="tax_id" name="contact[Tax ID]" required>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="company_info">Tell us a bit about your company *</label>
+              <textarea id="company_info" name="contact[Company Information]" rows="4" required></textarea>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="form-group">
+              <label for="contact_name">Contact Name *</label>
+              <input type="text" id="contact_name" name="contact[Contact Name]" required>
+            </div>
+
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" id="title" name="contact[Title]">
+            </div>
+
+            <div class="form-group">
+              <label for="website">Website or Social Media Handle</label>
+              <input type="text" id="website" name="contact[Website/Social Media]">
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" name="contact[Phone]" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="contact[email]" required>
+            </div>
+
+            <!-- Shipping Address -->
+            <div class="form-group full-width">
+              <h4>Shipping Address</h4>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="address1">Shipping Address Line 1 *</label>
+              <input type="text" id="address1" name="contact[Address Line 1]" required>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="address2">Shipping Address Line 2</label>
+              <input type="text" id="address2" name="contact[Address Line 2]">
+            </div>
+
+            <div class="form-group">
+              <label for="city">City *</label>
+              <input type="text" id="city" name="contact[City]" required>
+            </div>
+
+            <div class="form-group">
+              <label for="state">State *</label>
+              <input type="text" id="state" name="contact[State]" required>
+            </div>
+
+            <div class="form-group">
+              <label for="zip">ZIP Code *</label>
+              <input type="text" id="zip" name="contact[ZIP]" required>
+            </div>
+
+            <!-- Referral Source -->
+            <div class="form-group full-width">
+              <label for="hear_about">Where did you hear about us? *</label>
+              <select id="hear_about" name="contact[Heard About From]" required onchange="toggleReferralField(this)">
+                <option value="">Please Select</option>
+                <option value="Referral">Referral</option>
+                <option value="Online Search">Online Search</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Marketing Email">Marketing Email</option>
+                <option value="Tradeshow">Tradeshow</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width" id="referral_specify_container" style="display: none;">
+              <label for="referral_specify">Please Specify *</label>
+              <input type="text" id="referral_specify" name="contact[Referral Specify]">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit Application</button>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+{% comment %} .wholesale-application-form {
+  padding: 40px 0;
+  background: #f9f9f9;
+} {% endcomment %}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #333;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.alert-success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.btn-primary {
+  background: #000;
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  {% comment %} border-radius: 4px; {% endcomment %}
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #333;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<script>
+function toggleReferralField(select) {
+  const referralContainer = document.getElementById('referral_specify_container');
+  const referralInput = document.getElementById('referral_specify');
+  
+  if (select.value === 'Referral' || select.value === 'Other') {
+    referralContainer.style.display = 'block';
+    referralInput.required = true;
+  } else {
+    referralContainer.style.display = 'none';
+    referralInput.required = false;
+    referralInput.value = '';
+  }
+}
+
+// Form validation
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('.wholesale-form');
+  
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      const hearAbout = document.getElementById('hear_about');
+      const referralSpecify = document.getElementById('referral_specify');
+      
+      if ((hearAbout.value === 'Referral' || hearAbout.value === 'Other') && !referralSpecify.value.trim()) {
+        e.preventDefault();
+        alert('Please specify where you heard about us.');
+        referralSpecify.focus();
+      }
+    });
+  }
+});
+</script>
