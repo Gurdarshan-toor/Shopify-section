@@ -1,0 +1,542 @@
+@font-face {
+    font-family: Space-Grotesk-Bold;
+    src: url(https://www.azzaripro.com/calculator/fonts/SpaceGrotesk-Bold.ttf)
+}
+
+@font-face {
+    font-family: Outfit-Regular;
+    src: url(https://www.azzaripro.com/calculator/fonts/Outfit-Regular.ttf)
+}
+
+:root {
+    --col-primary: #ffb606;
+    --col-secondary: #0f252a
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box
+}
+
+.font-title-1 {
+    font-size: 3rem;
+    font-family: Space-Grotesk-Bold;
+    letter-spacing: -1.5px;
+    margin-block-start: 0;
+    margin-block-end: 1.25rem;
+    margin-inline: .625rem
+}
+
+.main-container>.wrapper {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding-block: 1.25rem
+}
+
+.peptide-calc-container {
+    margin-top: 6rem
+}
+
+.calc-phases {
+    display: grid;
+    grid-template-areas: "stack";
+    align-items: start;
+    justify-items: center;
+    position: relative
+}
+
+.phase {
+    grid-area: stack;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.phase:has(#slider_wrapper) {
+    width: 500px
+}
+
+#slider_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+#slider_wrapper {
+    width: 90%;
+    margin: 0 auto
+}
+
+.phase .input_title {
+    margin-top: 0;
+    font-weight: 400;
+    text-align: center
+}
+
+#slider_wrapper #syringe_size_slider {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+#slider_wrapper #syringe_size_slider:before {
+    content: " ";
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    width: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #0f252a
+}
+
+#slider_wrapper #syringe_size_slider input,
+#slider_wrapper #syringe_size_slider label {
+    box-sizing: border-box;
+    flex: 1;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer
+}
+
+#slider_wrapper #syringe_size_slider label {
+    display: inline-block;
+    position: relative;
+    width: 20%;
+    height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+#slider_wrapper #syringe_size_slider label:before {
+    content: attr(data-syringe-size);
+    position: absolute;
+    left: 50%;
+    padding-top: 10px;
+    transform: translate(-50%, 45px);
+    font-size: 14px;
+    letter-spacing: .4px;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: .85;
+    transition: all .15s ease-in-out
+}
+
+#slider_wrapper #syringe_size_slider label:after {
+    content: " ";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.375rem;
+    height: 1.375rem;
+    border: 2px solid #0f252a;
+    background: #fff;
+    border-radius: 50%;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: 1;
+    cursor: pointer;
+    transition: all .15s ease-in-out
+}
+
+#slider_wrapper #syringe_size_slider label:hover:after {
+    transform: translate(-50%, -50%) scale(1.25)
+}
+
+#slider_wrapper #syringe_size_slider input {
+    display: none
+}
+
+#slider_wrapper #syringe_size_slider input:checked+label:before {
+    font-weight: 800;
+    opacity: 1
+}
+
+#slider_wrapper #syringe_size_slider input:checked+label:after {
+    transform: translate(-50%, -50%) scale(1.125)
+}
+
+#slider_wrapper #syringe_size_slider input:checked~#syringe-size-pos {
+    opacity: 1
+}
+
+#slider_wrapper #syringe_size_slider input:checked:nth-child(1)~#syringe-size-pos {
+    left: 10%
+}
+
+#slider_wrapper #syringe_size_slider input:checked:nth-child(3)~#syringe-size-pos {
+    left: 30%
+}
+
+#slider_wrapper #syringe_size_slider input:checked:nth-child(5)~#syringe-size-pos {
+    left: 50%
+}
+
+#slider_wrapper #syringe_size_slider input:checked:nth-child(7)~#syringe-size-pos {
+    left: 70%
+}
+
+#slider_wrapper #syringe_size_slider input:checked:nth-child(9)~#syringe-size-pos {
+    left: 90%
+}
+
+#slider_wrapper #syringe_size_slider #syringe-size-pos {
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 1rem;
+    height: 1rem;
+    background: var(--col-primary);
+    border-radius: 50%;
+    transition: all .15s ease-in-out;
+    transform: translate(-50%, -50%);
+    border: 0 solid #fff;
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none
+}
+
+form:valid #syringe_size_slider input+label:before {
+    transform: translate(-50%, 45px) scale(.9);
+    transition: all .15s linear
+}
+
+form:valid #syringe_size_slider input:checked+label:before {
+    transform: translate(-50%, 45px) scale(1.1);
+    transition: all .15s linear
+}
+
+#slider_wrapper+button {
+    display: block;
+    position: relative;
+    margin: 56px auto 0;
+    padding: 10px 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: all .15s ease-in-out;
+    font-family: inherit;
+    font-size: 24px;
+    font-weight: 600;
+    background: #fff;
+    border: 2px solid #0f252a;
+    border-radius: 8px;
+    outline: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer
+}
+
+#slider_wrapper+button:hover {
+    background: #0f252a;
+    color: #fff
+}
+
+#slider_wrapper+button:hover:active {
+    transform: scale(.9)
+}
+
+#slider_wrapper+button:focus {
+    background: #4caf50;
+    border-color: #4caf50;
+    color: #fff;
+    pointer-events: none
+}
+
+#slider_wrapper+button:focus:before {
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite
+}
+
+#slider_wrapper+button:before {
+    display: inline-block;
+    width: 0;
+    opacity: 0;
+    content: "";
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    margin-right: 0;
+    transform: rotate(0)
+}
+
+form:invalid+button {
+    pointer-events: none;
+    opacity: .25
+}
+
+@-webkit-keyframes spin {
+    0% {
+        transform: rotate(0);
+        width: 24px;
+        opacity: 1;
+        margin-right: 12px
+    }
+
+    to {
+        transform: rotate(360deg);
+        width: 24px;
+        opacity: 1;
+        margin-right: 12px
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+        width: 24px;
+        opacity: 1;
+        margin-right: 12px
+    }
+
+    to {
+        transform: rotate(360deg);
+        width: 24px;
+        opacity: 1;
+        margin-right: 12px
+    }
+}
+
+.phase .wrapper {
+    position: relative;
+    display: flex;
+    gap: 1rem;
+    align-items: center
+}
+
+.phase select {
+    position: relative;
+    -webkit-appearance: none;
+    appearance: none;
+    border: 0;
+    outline: 0;
+    padding: .75rem 2rem .75rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem
+}
+
+.phase input::placeholder,
+.phase input::-webkit-input-placeholder {
+    font-size: 1rem;
+    opacity: .5
+}
+
+:where(.dry-medication, .desired-dose) .wrapper:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: .75rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #333
+}
+
+input.naked {
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid black;
+    width: 7rem;
+    text-align: center;
+    font-size: 2rem
+}
+
+.phase .unit {
+    font-size: 1.25rem
+}
+
+.topcontainer {
+    display: flex;
+    flex-direction: row;
+    align-items: end
+}
+
+.nav-controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 25px
+}
+
+@media screen and (max-width: 500px) {
+    .nav-controls {
+        flex-direction: row
+    }
+
+    .topcontainer {
+        flex-direction: column;
+        align-items: unset
+    }
+}
+
+.nav-controls button {
+    background-color: var(--col-secondary);
+    color: #fff;
+    padding: .688rem 2.5rem;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    border-radius: .25rem;
+    letter-spacing: .025rem;
+    cursor: pointer
+}
+
+.nav-controls button.disabled {
+    background-color: #a4a4a4;
+    cursor: default;
+    pointer-events: none
+}
+
+.nav-controls button.pc-restart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .75rem
+}
+
+.restart-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg version='1.1' id='svg1' xml:space='preserve' width='15.517' height='15.125' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='g1'%3E%3Cpath id='path139' style='fill:none;fill-opacity:1;stroke:%23f9fbfc;stroke-width:1.23929;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1' d='M12.276 1.992a7.09 7.09 0 1 1-9.146.01'/%3E%3Cpath style='fill:%23f9fbfc;fill-opacity:1;stroke:none;stroke-width:1.98052;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1' d='m11.305 5.125 4.114-3.944c.192-.185.08-.465-.157-.5L10.794.007c-.324-.048-.51.119-.473.454l.483 4.492c.018.165.26.402.501.17Z' id='path141'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.phase .digit {
+    font-weight: 700
+}
+
+#svg_peptide_animation {
+    display: block;
+    max-width: 50rem;
+    margin: 0 auto;
+    border-radius: .25rem
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        font-size: .8rem
+    }
+
+    .font-title-1 {
+        font-size: 2rem;
+        letter-spacing: -.15rem
+    }
+
+    input.naked {
+        width: 5rem;
+        font-size: 1.5rem
+    }
+
+    .phase select {
+        padding: .5rem 1.5rem .5rem .5rem;
+        font-size: .875rem
+    }
+
+    .main-container>.wrapper {
+        padding-inline: 1rem
+    }
+
+    .peptide-calc-container {
+        margin-top: 3rem
+    }
+
+    .calc-phases {
+        grid-template-areas: "stack";
+        margin-right: 1rem
+    }
+
+    .phase {
+        margin-bottom: 2rem
+    }
+
+    .phase:has(#slider_wrapper) {
+        width: 100%
+    }
+
+    #slider_wrapper {
+        width: 100%
+    }
+
+    #slider_wrapper #syringe_size_slider {
+        height: 40px
+    }
+
+    #slider_wrapper #syringe_size_slider:before {
+        height: 1px
+    }
+
+    #slider_wrapper #syringe_size_slider label:before {
+        font-size: 12px
+    }
+
+    #slider_wrapper #syringe_size_slider label:after {
+        width: 1.125rem;
+        height: 1.125rem
+    }
+
+    #slider_wrapper #syringe_size_slider #syringe-size-pos {
+        width: .875rem;
+        height: .875rem
+    }
+
+    #slider_wrapper+button {
+        padding: 8px 16px;
+        font-size: 18px
+    }
+
+    .phase .wrapper {
+        gap: .5rem
+    }
+
+    .phase .unit {
+        font-size: 1rem
+    }
+
+    .nav-controls {
+        margin-top: 0rem
+    }
+
+    .nav-controls button {
+        padding: .5rem 1.5rem;
+        font-size: .875rem
+    }
+
+    .restart-icon {
+        width: 1.25rem;
+        height: 1.25rem
+    }
+
+    .phase .digit {
+        font-size: 1.5rem
+    }
+
+    #svg_peptide_animation {
+        max-width: 100%
+    }
+}
+
+/*# sourceMappingURL=/cdn/shop/t/1/assets/peptidecalculator.css.map?v=173921167938083206461753220855 */
