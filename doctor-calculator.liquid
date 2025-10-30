@@ -1,0 +1,803 @@
+
+  <section id="shopify-section-template--17570798076015__peptide_calculator_JRfXEV" class="shopify-section section section-{{ section.id }}-padding"><section class="faq-section">
+  <div class="w-layout-blockcontainer calculator w-container">
+    <div class="calculdiv">
+      <div class="w-embed w-iframe">
+        <!---<div style="position: relative; width: 100%; padding-bottom: 120%; height: 575px; overflow: hidden; ">--->
+        <div>
+          <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/0948/8541/3175/files/calculator.css?v=1761717810">
+<div class="main-container cus_container">
+  <div class="cus_wrapper">
+    <div class="peptide-calc-container">
+      <!----><div class="topcontainer" "="">
+      <div class="calc-phases">
+        <div class="phase active">
+          <div id="slider_wrapper">
+            {% comment %} <h2 class="input_title">Size of your syringe:</h2> {% endcomment %}
+            {% if section.settings.syringe_title !=blank %}
+            <h2 class="input_title syrings_title">{{ section.settings.syringe_title }}</h2>
+            {% endif %}
+            <div id="syringe_size_slider">
+              <input type="radio" name="syringe_size" id="1" value="1" required="">
+              <label for="1" data-syringe-size="0.25ml"></label>
+              <input type="radio" name="syringe_size" id="2" value="2" required="">
+              <label for="2" data-syringe-size="0.5ml"></label>
+              <input type="radio" name="syringe_size" id="3" value="3" required="" checked="">
+              <label for="3" data-syringe-size="1ml"></label>
+              <input type="radio" name="syringe_size" id="4" value="4" required="">
+              <label for="4" data-syringe-size="2ml"></label>
+              <input type="radio" name="syringe_size" id="5" value="5" required="">
+              <label for="5" data-syringe-size="3ml"></label>
+              <div id="syringe-size-pos"></div>
+            </div>
+          </div>
+        </div>
+        <div class="phase dry-medication" style="opacity: 0; visibility: hidden;">
+          {% comment %} <h4 class="input_title">Total amount of dry medication in your vial:</h4> {% endcomment %}
+          {% if section.settings.medication_title !=blank %}
+            <h4 class="input_title medication_font_size">{{ section.settings.medication_title }}</h4>
+            {% endif %}
+          <div class="wrapper">
+            <input id="dryMed" type="text" inputmode="numeric" pattern="\d*" class="naked" value="10" placeholder="10">
+            <select id="dryMedUnit">
+              <option value="g">g</option>
+              <option value="mg" selected="">mg</option>
+              <option value="mcg">mcg</option>
+            </select>
+          </div>
+        </div>
+        <div class="phase bacteriostatic-water" style="opacity: 0; visibility: hidden;">
+          {% comment %} <h4 class="input_title">Total amount of bacteriostatic water you want to add:</h4> {% endcomment %}
+           {% if section.settings.bacteriostatic_title !=blank %}
+            <h4 class="input_title bacteriostatic_font_size">{{ section.settings.bacteriostatic_title }}</h4>
+            {% endif %}
+          <div class="wrapper">
+            <input id="liquidAmount" type="text" inputmode="numeric" pattern="\d*" class="naked" value="1" placeholder="0-1">
+            <span class="unit">ml</span>
+          </div>
+        </div>
+        <div class="phase desired-dose" style="opacity: 0; visibility: hidden;">
+          {% comment %} <h4 class="input_title">Desired dose:</h4> {% endcomment %}
+          {% if section.settings.desired_title !=blank %}
+            <h4 class="input_title desired_font_size">{{ section.settings.desired_title }}</h4>
+            {% endif %}
+          <div class="wrapper">
+            <input id="desiredDose" type="text" inputmode="numeric" pattern="\d*" class="naked" value="500" placeholder="500">
+            <select id="doseUnit">
+              <option value="g">g</option>
+              <option value="mg">mg</option>
+              <option selected="" value="mcg">mcg</option>
+            </select>
+          </div>
+        </div>
+        <div class="phase result" style="opacity: 0; visibility: hidden;">
+          {% comment %} <h4 class="input_title">Results:</h4> {% endcomment %}
+           {% if section.settings.results_title !=blank %}
+            <h4 class="input_title results_font_size">{{ section.settings.results_title }}</h4>
+            {% endif %}
+          <div class="wrapper">
+            <span>Units per dose: </span>
+            <span class="digit" id="unitsPerDose"></span>
+          </div>
+          <div class="wrapper">
+            <span>Total Doses in Vial: </span>
+            <span class="digit" id="totalDoses"></span>
+          </div>
+        </div>
+      </div>
+      <div class="nav-controls">
+        <button class="pc-back disabled" data-phase="0">Back</button>
+        <button class="pc-next">Next</button>
+        <button class="pc-restart" style="display: none;">
+          <div class="restart-icon"></div>
+          <span>Restart</span>
+        </button>
+      </div>
+      </div>
+      <div class="animation-container">
+        <svg version="1.1" id="svg_peptide_animation" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 553.364">
+          <defs>
+            <linearGradient xlink:href="#lg1" id="lg2" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1558.43 -448.373) scale(1.88812)" x1="1027.275" y1="338.197" x2="1027.275" y2="359.002" spreadMethod="pad"></linearGradient>
+            <linearGradient x1="1027.275" y1="338.197" x2="1027.275" y2="359.002" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1522.33 -448.373) scale(1.88812)" spreadMethod="pad" id="lg1">
+              <stop style="stop-opacity:0;stop-color:#fff" offset="0" id="stop45"></stop>
+              <stop style="stop-opacity:.52486458;stop-color:#fff" offset=".339" id="stop46"></stop>
+              <stop style="stop-opacity:.13408103;stop-color:#fff" offset=".5" id="stop47"></stop>
+              <stop style="stop-opacity:0;stop-color:#fff" offset="1" id="stop48"></stop>
+            </linearGradient>
+            <linearGradient xlink:href="#lg1" id="lg3" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1558.43 -448.373) scale(1.88812)" x1="1027.275" y1="340.446" x2="1027.275" y2="356.498" spreadMethod="pad"></linearGradient>
+            <linearGradient x1="1027.275" y1="338.197" x2="1027.275" y2="359.002" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1522.33 -448.373) scale(1.88812)" spreadMethod="pad" id="lg4">
+              <stop style="stop-opacity:0;stop-color:#fff" offset="0" id="stop1"></stop>
+              <stop style="stop-opacity:.52486458;stop-color:#fff" offset=".339" id="stop2"></stop>
+              <stop style="stop-opacity:.13408103;stop-color:#fff" offset=".5" id="stop3"></stop>
+              <stop style="stop-opacity:0;stop-color:#fff" offset="1" id="stop4"></stop>
+            </linearGradient>
+            <linearGradient xlink:href="#lg1" id="lg5" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1515.835 -447.864) scale(1.88812)" x1="1027.275" y1="338.197" x2="1027.275" y2="359.002" spreadMethod="pad"></linearGradient>
+            <linearGradient x1="1027.275" y1="338.197" x2="1027.275" y2="359.002" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1522.33 -448.373) scale(1.88812)" spreadMethod="pad" id="lg6">
+              <stop style="stop-opacity:0;stop-color:#fff" offset="0" id="stop5"></stop>
+              <stop style="stop-opacity:.52486458;stop-color:#fff" offset=".339" id="stop6"></stop>
+              <stop style="stop-opacity:.13408103;stop-color:#fff" offset=".5" id="stop7"></stop>
+              <stop style="stop-opacity:0;stop-color:#fff" offset="1" id="stop8"></stop>
+            </linearGradient>
+            <linearGradient xlink:href="#lg1" id="lg7" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1571.956 -447.926) scale(1.88812)" x1="1027.275" y1="336.17" x2="1027.275" y2="360.819" spreadMethod="pad"></linearGradient>
+            <linearGradient x1="1027.275" y1="338.197" x2="1027.275" y2="359.002" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1522.33 -448.373) scale(1.88812)" spreadMethod="pad" id="lg8">
+              <stop style="stop-opacity:0;stop-color:#fff" offset="0" id="stop9"></stop>
+              <stop style="stop-opacity:.52486458;stop-color:#fff" offset=".339" id="stop10"></stop>
+              <stop style="stop-opacity:.13408103;stop-color:#fff" offset=".5" id="stop11"></stop>
+              <stop style="stop-opacity:0;stop-color:#fff" offset="1" id="stop12"></stop>
+            </linearGradient>
+            <linearGradient xlink:href="#lg1" id="lg9" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1552.808 -441.247) scale(1.88812)" x1="1027.275" y1="331.125" x2="1027.275" y2="359.002" spreadMethod="pad"></linearGradient>
+            <linearGradient x1="1027.275" y1="338.197" x2="1027.275" y2="359.002" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1522.33 -448.373) scale(1.88812)" spreadMethod="pad" id="lg10">
+              <stop style="stop-opacity:0;stop-color:#fff" offset="0" id="stop13"></stop>
+              <stop style="stop-opacity:.52486458;stop-color:#fff" offset=".339" id="stop14"></stop>
+              <stop style="stop-opacity:.13408103;stop-color:#fff" offset=".5" id="stop15"></stop>
+              <stop style="stop-opacity:0;stop-color:#fff" offset="1" id="stop16"></stop>
+            </linearGradient>
+            <linearGradient x1="1224.687" y1="492.66" x2="1339.282" y2="492.66" gradientUnits="userSpaceOnUse" gradientTransform="translate(-622.197 31.561) scale(.86564)" spreadMethod="pad" id="lg11">
+              <stop style="stop-opacity:0;stop-color:#fff" offset="0" id="stop29"></stop>
+              <stop style="stop-opacity:.48867018;stop-color:#fff" offset=".262" id="stop30"></stop>
+              <stop style="stop-opacity:0;stop-color:#e0e0e0" offset=".518" id="stop31"></stop>
+              <stop style="stop-opacity:0;stop-color:#fff" offset="1" id="stop32"></stop>
+            </linearGradient>
+            <linearGradient x1="1224.687" y1="492.66" x2="1339.282" y2="492.66" gradientUnits="userSpaceOnUse" gradientTransform="translate(-810.255 31.561) scale(.86564)" spreadMethod="pad" id="lg11">
+              <stop style="stop-opacity:0;stop-color:#fff" offset="0" id="stop18"></stop>
+              <stop style="stop-opacity:.48867018;stop-color:#fff" offset=".262" id="stop19"></stop>
+              <stop style="stop-opacity:0;stop-color:#e0e0e0" offset=".518" id="stop20"></stop>
+              <stop style="stop-opacity:0;stop-color:#fff" offset="1" id="stop21"></stop>
+            </linearGradient>
+            <clipPath clipPathUnits="userSpaceOnUse" id="cp1">
+              <path d="M301.064 190.187h84.8c30.739 0 54.104 0 54.104 14.917v9.443c0 14.921-23.656 14.921-54.104 14.921h-84.8Z"></path>
+            </clipPath>
+            <clipPath clipPathUnits="userSpaceOnUse" id="cp2">
+              <path d="M301.064 194.43h84.8c30.739 0 54.104 0 54.104 11.694v7.404c0 11.698-23.656 11.698-54.104 11.698h-84.8Z"></path>
+            </clipPath>
+            <clipPath clipPathUnits="userSpaceOnUse" id="cp3">
+              <path d="M301.064 194.43h84.8c30.739 0 54.104 0 54.104 11.694v7.404c0 11.698-23.656 11.698-54.104 11.698h-84.8Z"></path>
+            </clipPath>
+            <clipPath clipPathUnits="userSpaceOnUse" id="cp4">
+              <path d="M258.86 190.697h169.599c30.738 0 54.103 0 54.103 14.917v9.443c0 14.921-23.656 14.921-54.103 14.921h-169.6Z"></path>
+            </clipPath>
+            <clipPath clipPathUnits="userSpaceOnUse" id="cp5">
+              <path d="m314.59 185.632 57.748.788c30.736.419 54.104 0 54.104 14.917v17.872c0 14.921-23.656 14.921-54.104 14.921l-57.748-.787Z"></path>
+            </clipPath>
+            <clipPath clipPathUnits="userSpaceOnUse" id="cp6">
+              <path d="M295.83 183.957h108.585c30.74 0 41.175 6.464 41.175 21.381v9.701c0 14.921-10.727 21.555-41.175 21.555H295.83Z"></path>
+            </clipPath>
+            <clipPath clipPathUnits="userSpaceOnUse" id="cp7">
+              <path d="M459.99 428.281c2.953-3.062 4.562-8.36 4.562-19.261h45.599c0 11.65.994 15.604 3.734 19.261 2.886 3.848 21.948 7.38 21.948 14.667v78.541a6.642 6.642 0 0 1-6.656 6.656h-83.286a6.642 6.642 0 0 1-6.656-6.656v-78.541c0-8.777 17.806-11.6 20.754-14.667Z"></path>
+            </clipPath>
+            <clipPath clipPathUnits="userSpaceOnUse" id="cp8">
+              <path d="M259.995 428.281c4.261-3.062 6.584-8.36 6.584-19.261h65.796c0 11.65 1.437 15.604 5.39 19.261 4.162 3.848 10.011 7.38 10.011 14.667v78.541a6.642 6.642 0 0 1-6.656 6.656h-83.287a6.642 6.642 0 0 1-6.656-6.656v-78.541c0-8.777 4.563-11.6 8.818-14.667Z"></path>
+            </clipPath>
+          </defs>
+          <g>
+            <path id="base" d="M0 0h800v553.364H0Z" style="fill:#eff6f8;fill-opacity:.376471"></path>
+            <g transform="translate(469.889 210.484)">
+              <g class="syringe" id="s3ml" opacity="0" transform="translate(0 20)">
+                <g transform="translate(-469.889 -210.484)">
+
+                  <g clip-path="url(#cp6)" style="opacity:.6;fill:#aef">
+                    <path class="padd" opacity="0" d="M 438.66714,186.3569 H 446.0076 V 233.05891 H 438.66714 Z"></path>
+                    <g transform="translate(438.66666 210.27498)">
+                      <g class="contents" transform="scale(0 1)" style="width: 50px;">
+                        <g transform="translate(-438.66666 -210.27498)">
+                          <rect width="111.84151" height="53.195" x="326.825" y="183.591" ry="0"></rect>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                  <path d="M468.84 209.274v2h78.026l6.167-2Z" style="fill:#0e2125"></path>
+                  <path d="M448.423 205.507h15.755a4.759 4.759 0 0 1 4.767 4.767 4.762 4.762 0 0 1-4.767 4.765h-15.755Z" style="fill:#0e2125;stroke:#fff;stroke-width:1.88812;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <path d="M295.83 183.957h108.585c30.74 0 41.175 6.464 41.175 21.381v9.701c0 14.921-10.727 21.555-41.175 21.555H295.83Z" style="fill:none;stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <g class="plunger">
+                    <path d="M280.44 203.77h152.394v13.01H280.44Z" style="fill:#9e9e9e;stroke:#fff;stroke-width:1.51703;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                    <path d="M424.681 185.072v50.397h4.678v-4.891c-.005-.025 0-.052 0-.073 0-.786.63-1.422 1.416-1.422h1.724c.787 0 1.423.636 1.423 1.422l.125 4.64 4.618-1.027.002-47.761-4.803-.73v3.99c.006.028 0 .053 0 .075 0 .786-.63 1.42-1.417 1.42h-1.724a1.42 1.42 0 0 1-1.42-1.42v-4.62Z" style="fill:#4d4d4d" clip-path="url(#cp6)"></path>
+                    <path d="M249.467 200.278h30.973v19.99h-30.973Z" style="fill:#0e2125;stroke:#fff;stroke-width:1.88812;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                    <path d="M249.415 181.514a2.439 2.439 0 0 1 2.443 2.443v52.637a2.443 2.443 0 0 1-2.443 2.443 2.444 2.444 0 0 1-2.448-2.443v-52.637a2.44 2.44 0 0 1 2.448-2.443Z" style="fill:#0e2125"></path>
+                  </g>
+                  <path d="M289.392 175.42a6.421 6.421 0 0 1 6.438 6.433v56.84a6.422 6.422 0 0 1-6.438 6.437 6.42 6.42 0 0 1-6.432-6.437v-56.84a6.42 6.42 0 0 1 6.432-6.432Z" style="fill:#fff;stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <path d="M295.83 183.957h108.585c30.74 0 41.175 6.464 41.175 21.381v9.701c0 14.921-10.727 21.555-41.175 21.555H295.83Z" style="fill:url(#lg9);stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" opacity="1"></path>
+                  <g class="overlay">
+                    <g class="ticks">
+                      <g style="fill:none;stroke:#0e2125;stroke-width:1.89108;stroke-linecap:round;stroke-linejoin:round">
+                        <path d="M438.667 230.01v-14.567"></path>
+                        <path d="M420.027 234.128v-18.684"></path>
+                        <path d="M401.387 234.86v-19.416"></path>
+                        <path d="M382.746 234.86v-19.416"></path>
+                        <path d="M364.106 234.86v-19.416"></path>
+                        <path d="M345.465 234.86v-19.416"></path>
+                        <path d="M326.825 234.86v-19.416"></path>
+                      </g>
+                      <g style="fill:none;stroke:#0e2125;stroke-width:.94406;stroke-linecap:round;stroke-linejoin:round">
+                        <path d="M434.658 231.023v-6.397"></path>
+                        <path d="M431.121 232.587v-7.96"></path>
+                        <path d="M427.58 233.827v-9.2"></path>
+                        <path d="M424.043 234.827v-10.2"></path>
+                        <path d="M416.017 235.334v-10.708"></path>
+                        <path d="M412.481 235.334v-10.708"></path>
+                        <path d="M408.94 235.334v-10.708"></path>
+                        <path d="M405.402 235.334v-10.708"></path>
+                        <path d="M397.377 235.334v-10.708"></path>
+                        <path d="M393.84 235.334v-10.708"></path>
+                        <path d="M390.298 235.334v-10.708"></path>
+                        <path d="M386.762 235.334v-10.708"></path>
+                        <path d="M378.735 235.334v-10.708"></path>
+                        <path d="M375.2 235.334v-10.708"></path>
+                        <path d="M371.658 235.334v-10.708"></path>
+                        <path d="M368.121 235.334v-10.708"></path>
+                        <path d="M360.095 235.334v-10.708"></path>
+                        <path d="M356.558 235.334v-10.708"></path>
+                        <path d="M353.017 235.334v-10.708"></path>
+                        <path d="M349.481 235.334v-10.708"></path>
+                        <path d="M341.454 235.334v-10.708"></path>
+                        <path d="M337.918 235.334v-10.708"></path>
+                        <path d="M334.377 235.334v-10.708"></path>
+                        <path d="M330.84 235.334v-10.708"></path>
+                      </g>
+                    </g>
+                    <text xml:space="preserve" x="310.837" y="231.353" style="font-size:16px;stroke-width:1.33333">
+                      <tspan style="font-variant:normal;font-weight:300;font-size:9px;font-family:Outfit;fill:#28393d" x="310.837" y="231.353">ml</tspan>
+                    </text>
+                    <g class="markings">
+                      <text xml:space="preserve" x="361.376" y="212.133" style="font-size:16px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;fill:#28393d" x="361.376" y="212.133">2</tspan>
+                      </text>
+                      <text xml:space="preserve" x="414.23" y="212.133" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="414.23" y="212.133">.5</tspan>
+                      </text>
+                      <text xml:space="preserve" x="399.303" y="212.133" style="font-size:16px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;fill:#28393d" x="399.303" y="212.133">1</tspan>
+                      </text>
+                      <text xml:space="preserve" x="376.304" y="212.133" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="376.304" y="212.133">1.5</tspan>
+                      </text>
+                      <text xml:space="preserve" x="338.949" y="212.133" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="338.949" y="212.133">2.5</tspan>
+                      </text>
+                      <text xml:space="preserve" x="323.582" y="211.962" style="font-size:16px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;fill:#28393d" x="323.582" y="211.962">3</tspan>
+                      </text>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g transform="translate(450.741 210.274)">
+              <g class="syringe" id="s2ml" opacity="0" transform="translate(0 20)">
+                <g transform="translate(-450.741 -210.274)">
+
+                  <g clip-path="url(#cp5)" style="opacity:.6;fill:#aef">
+                    <path class="padd" opacity="0" d="M 419.5188,185.99162H 427.53683V 234.0998H 419.5188Z"></path>
+                    <g transform="translate(419.5188 210.27498)">
+                      <g class="contents" transform="scale(0 1)" style="width: 50px;">
+                        <g transform="translate(-419.5188 -210.27498)">
+                          <rect width="74.49926" height="46.955" x="345.02" y="186.796" ry="0"></rect>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                  <path d="M449.69 209.275v2h78.028l6.167-2Z" style="fill:#0e2125"></path>
+                  <path d="M429.275 205.508h15.755a4.759 4.759 0 0 1 4.767 4.767 4.762 4.762 0 0 1-4.767 4.765h-15.755Z" style="fill:#0e2125;stroke:#fff;stroke-width:1.88812;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <g class="plunger">
+                    <path d="M 299.27621,203.70699L 407.95876,203.88377V 216.89377L 299.27621,216.71699Z" style="fill:#9e9e9e;stroke:#fff;stroke-width:1.51703;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                    <path d="M 405.53279,188.49105L 405.47922,236.19467H 410.15722L 410.21079,227.42549C 410.20579,227.40049 410.21079,227.37349 410.21079,227.35249C 410.21079,226.56649 410.84079,225.93049 411.62679,225.93049H 413.35079C 414.13779,225.93049 414.77379,226.56649 414.77379,227.35249L 414.84522,235.86967L 419.46322,234.84367L 419.51879,189.77605L 414.71579,189.04605V 193.03705C 414.72179,193.06405 414.71579,193.08905 414.71579,193.11105C 414.71579,193.89705 414.08579,194.53205 413.29879,194.53205H 411.57479C 410.78976,194.5326 410.15324,193.89607 410.15379,193.11105V 188.49105Z" style="fill:#4d4d4d" clip-path="url(#cp5)"></path>
+                    <path d="M268.615 200.28h30.661v19.99h-30.66Z" style="fill:#0e2125;stroke:#fff;stroke-width:1.88812;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                    <path d="M268.563 183.977a2.439 2.439 0 0 1 2.443 2.443v47.71a2.443 2.443 0 0 1-2.443 2.443 2.444 2.444 0 0 1-2.448-2.443v-47.71a2.44 2.44 0 0 1 2.448-2.443Z" style="fill:#0e2125"></path>
+                  </g>
+                  <path d="m314.59 185.632 57.748.788c30.736.419 54.104 0 54.104 14.917v17.872c0 14.921-23.656 14.921-54.104 14.921l-57.748-.787Z" style="fill:none;stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <path d="M308.152 179.987a6.421 6.421 0 0 1 6.438 6.433v47.71a6.422 6.422 0 0 1-6.438 6.437 6.42 6.42 0 0 1-6.432-6.437v-47.71a6.42 6.42 0 0 1 6.432-6.432Z" style="fill:#fff;stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <path d="m314.59 185.632 57.748.788c30.736.419 54.104 0 54.104 14.917v17.872c0 14.921-23.656 14.921-54.104 14.921l-57.748-.787Z" style="fill:url(#lg7);stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" opacity="1"></path>
+                  <g class="overlay">
+                    <g class="ticks">
+                      <g style="fill:none;stroke:#0e2125;stroke-width:1.89108;stroke-linecap:round;stroke-linejoin:round">
+                        <path d="M419.519 229.544v-14.11"></path>
+                        <path d="M400.879 232.397v-16.962"></path>
+                        <path d="M382.239 232.397v-16.962"></path>
+                        <path d="M363.598 232.397v-16.962"></path>
+                        <path d="M344.958 232.397v-16.962"></path>
+                      </g>
+                      <g style="fill:none;stroke:#0e2125;stroke-width:.94406;stroke-linecap:round;stroke-linejoin:round">
+                        <path d="M415.51 231.116v-8.952"></path>
+                        <path d="M411.973 232.31v-10.146"></path>
+                        <path d="M408.43 232.31v-10.146"></path>
+                        <path d="M404.895 232.31v-10.146"></path>
+                        <path d="M396.869 232.872v-10.708"></path>
+                        <path d="M393.333 232.872v-10.708"></path>
+                        <path d="M389.79 232.872v-10.708"></path>
+                        <path d="M386.254 232.872v-10.708"></path>
+                        <path d="M378.229 232.872v-10.708"></path>
+                        <path d="M374.69 232.872v-10.708"></path>
+                        <path d="M371.15 232.872v-10.708"></path>
+                        <path d="M367.614 232.872v-10.708"></path>
+                        <path d="M359.587 232.872v-10.708"></path>
+                        <path d="M356.05 232.872v-10.708"></path>
+                        <path d="M352.51 232.872v-10.708"></path>
+                        <path d="M348.973 232.872v-10.708"></path>
+                      </g>
+                    </g>
+                    <text xml:space="preserve" x="328.968" y="228.373" style="font-size:16px;stroke-width:1.33333">
+                      <tspan style="font-variant:normal;font-weight:300;font-size:9px;font-family:Outfit;fill:#28393d" x="328.968" y="228.373">ml</tspan>
+                    </text>
+                    <g class="markings">
+                      <text xml:space="preserve" x="342.228" y="212.244" style="font-size:16px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;fill:#28393d" x="342.228" y="212.244">2</tspan>
+                      </text>
+                      <text xml:space="preserve" x="395.082" y="212.244" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="395.082" y="212.244">.5</tspan>
+                      </text>
+                      <text xml:space="preserve" x="380.154" y="212.244" style="font-size:16px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;fill:#28393d" x="380.154" y="212.244">1</tspan>
+                      </text>
+                      <text xml:space="preserve" x="357.155" y="212.244" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="357.155" y="212.244">1.5</tspan>
+                      </text>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g transform="translate(506.862 210.127)">
+              <g class="syringe active" id="s1ml" opacity="0" transform="matrix(1,0,0,1,0,0)" data-svg-origin="-296.8680419921875 -27.967010498046875" style="translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit;">
+                <g transform="translate(-506.862 -210.127)">
+                  <g clip-path="url(#cp4)" style="opacity:.6;fill:#aef">
+                    <path class="padd" opacity="0" d="M 475.79398,192.17062 H 484.0625 V 228.37934 H 475.79398 Z"></path>
+                    <g transform="translate(475.6395 211.27998)">
+                      <g class="contents" transform="scale(0 1)" style="width: 50px;">
+                        <g transform="translate(-475.6395 -211.27998)">
+                          <rect width="186.55948" height="39.666" x="289.235" y="190.503" ry="0"></rect>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                  <path d="M505.812 209.338v2h78.026l6.168-2Z" style="fill:#0e2125"></path>
+                  <path d="M485.396 205.571h15.755a4.759 4.759 0 0 1 4.767 4.767 4.762 4.762 0 0 1-4.767 4.765h-15.755Z" style="fill:#0e2125;stroke:#fff;stroke-width:1.88812;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <path d="M258.86 190.697h169.599c30.738 0 54.103 0 54.103 14.917v9.443c0 14.921-23.656 14.921-54.103 14.921h-169.6Z" style="fill:none;stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <g class="plunger">
+                    <path d="M243.155 203.977h226.747v12.596H243.156Z" style="fill:#9e9e9e;stroke:#fff;stroke-width:1.46883;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                    <path d="M461.808 190.697v39.281h4.678v-4.552c-.005-.025 0-.052 0-.073 0-.786.63-1.422 1.416-1.422h1.724c.787 0 1.423.636 1.423 1.422l.125 4.3 4.618-1.026.002-36.645-4.803-.73v3.991c.006.027 0 .052 0 .074 0 .786-.63 1.421-1.417 1.421h-1.724a1.42 1.42 0 0 1-1.421-1.421v-4.62Z" style="fill:#4d4d4d" clip-path="url(#cp4)"></path>
+                    <path d="M212.494 200.343h30.661v19.99h-30.66Z" style="fill:#0e2125;stroke:#fff;stroke-width:1.88812;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                    <path d="M212.442 185.671a2.439 2.439 0 0 1 2.444 2.443v44.448a2.443 2.443 0 0 1-2.444 2.443 2.444 2.444 0 0 1-2.448-2.443v-44.448a2.44 2.44 0 0 1 2.448-2.443Z" style="fill:#0e2125"></path>
+                  </g>
+                  <path d="M252.422 182.16a6.421 6.421 0 0 1 6.438 6.433v43.484a6.422 6.422 0 0 1-6.439 6.437 6.42 6.42 0 0 1-6.431-6.437v-43.484a6.42 6.42 0 0 1 6.431-6.432Z" style="fill:#fff;stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <path d="M258.86 190.696h169.599c30.738 0 54.103 0 54.103 14.917v9.443c0 14.921-23.656 14.921-54.103 14.921h-169.6Z" style="fill:url(#lg5);stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" opacity="1"></path>
+                  <g class="overlay">
+                    <g class="ticks">
+                      <g style="fill:none;stroke:#0e2125;stroke-width:1.89108;stroke-linecap:round">
+                        <path d="M475.64 225.39v-14.11"></path>
+                        <path d="M456.999 228.243v-16.962"></path>
+                        <path d="M438.358 228.243v-16.962"></path>
+                        <path d="M419.718 228.243v-16.962"></path>
+                        <path d="M401.077 228.243v-16.962"></path>
+                        <path d="M382.437 228.243v-16.962"></path>
+                        <path d="M363.796 228.243v-16.962"></path>
+                        <path d="M345.156 228.243v-16.962"></path>
+                        <path d="M326.515 228.243v-16.962"></path>
+                        <path d="M307.875 228.243v-16.962"></path>
+                        <path d="M289.235 228.243v-16.962"></path>
+                      </g>
+                      <g style="fill:none;stroke:#0e2125;stroke-width:.94406;stroke-linecap:round">
+                        <path d="M471.911 226.962v-8.952"></path>
+                        <path d="M468.183 228.155V218.01"></path>
+                        <path d="M464.455 228.155V218.01"></path>
+                        <path d="M460.727 228.155V218.01"></path>
+                        <path d="M453.27 228.718V218.01"></path>
+                        <path d="M449.543 228.718V218.01"></path>
+                        <path d="M445.815 228.718V218.01"></path>
+                        <path d="M442.087 228.718V218.01"></path>
+                        <path d="M434.63 228.718V218.01"></path>
+                        <path d="M430.902 228.718V218.01"></path>
+                        <path d="M427.174 228.718V218.01"></path>
+                        <path d="M423.446 228.718V218.01"></path>
+                        <path d="M415.99 228.718V218.01"></path>
+                        <path d="M412.262 228.718V218.01"></path>
+                        <path d="M408.534 228.718V218.01"></path>
+                        <path d="M404.806 228.718V218.01"></path>
+                        <path d="M397.35 228.718V218.01"></path>
+                        <path d="M393.621 228.718V218.01"></path>
+                        <path d="M389.893 228.718V218.01"></path>
+                        <path d="M386.165 228.718V218.01"></path>
+                        <path d="M378.709 228.718V218.01"></path>
+                        <path d="M374.98 228.718V218.01"></path>
+                        <path d="M371.253 228.718V218.01"></path>
+                        <path d="M367.525 228.718V218.01"></path>
+                        <path d="M360.068 228.718V218.01"></path>
+                        <path d="M356.34 228.718V218.01"></path>
+                        <path d="M352.612 228.718V218.01"></path>
+                        <path d="M348.884 228.718V218.01"></path>
+                        <path d="M341.428 228.718V218.01"></path>
+                        <path d="M337.7 228.718V218.01"></path>
+                        <path d="M333.972 228.718V218.01"></path>
+                        <path d="M330.244 228.718V218.01"></path>
+                        <path d="M322.787 228.718V218.01"></path>
+                        <path d="M319.06 228.718V218.01"></path>
+                        <path d="M315.331 228.718V218.01"></path>
+                        <path d="M311.603 228.718V218.01"></path>
+                        <path d="M304.147 228.718V218.01"></path>
+                        <path d="M300.419 228.718V218.01"></path>
+                        <path d="M296.69 228.718V218.01"></path>
+                        <path d="M292.963 228.718V218.01"></path>
+                      </g>
+                    </g>
+                    <text xml:space="preserve" x="273.245" y="224.737" style="font-size:16px;stroke-width:1.33333">
+                      <tspan style="font-variant:normal;font-weight:300;font-size:9px;font-family:Outfit;fill:#28393d" x="273.245" y="224.737">ml</tspan>
+                    </text>
+                    <g class="markings">
+                      <text xml:space="preserve" x="287.405" y="207.97" style="font-size:16px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;fill:#28393d" x="287.405" y="207.97">1</tspan>
+                      </text>
+                      <text xml:space="preserve" x="303.198" y="207.97" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="303.198" y="207.97">.9</tspan>
+                      </text>
+                      <text xml:space="preserve" x="321.652" y="207.97" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="321.652" y="207.97">.8</tspan>
+                      </text>
+                      <text xml:space="preserve" x="340.724" y="207.97" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="340.724" y="207.97">.7</tspan>
+                      </text>
+                      <text xml:space="preserve" x="358.982" y="207.97" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="358.982" y="207.97">.6</tspan>
+                      </text>
+                      <text xml:space="preserve" x="377.586" y="207.97" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="377.586" y="207.97">.5</tspan>
+                      </text>
+                      <text xml:space="preserve" x="396.024" y="207.97" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="396.024" y="207.97">.4</tspan>
+                      </text>
+                      <text xml:space="preserve" x="414.922" y="207.97" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="414.922" y="207.97">.3</tspan>
+                      </text>
+                      <text xml:space="preserve" x="433.544" y="207.97" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="433.544" y="207.97">.2</tspan>
+                      </text>
+                      <text xml:space="preserve" x="454.002" y="207.97" style="font-size:16px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="454.002" y="207.97">.1</tspan>
+                      </text>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g transform="translate(464.267 209.617)">
+              <g class="syringe" id="s0_25ml" opacity="0" transform="translate(0 20)">
+                <g transform="translate(-464.267 -209.617)">
+                  <g clip-path="url(#cp2)" style="opacity:.6;fill:#aef">
+                    <path class="padd" opacity="0" d="M 433.17908,192.17062 H 441.4476 V 228.37934 H 433.17908 Z"></path>
+                    <g transform="translate(433.17908 209.8275)">
+                      <g class="contents" transform="scale(0 1)" style="width: 50px;">
+                        <g transform="translate(-433.17908 -209.8275)">
+                          <rect width="93.336273" height="30.794" x="339.843" y="194.43" ry="0"></rect>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                  <path d="M463.217 208.828v2h78.027l6.167-2Z" style="fill:#0e2125"></path>
+                  <path d="M442.8 205.061h15.756a4.759 4.759 0 0 1 4.767 4.767 4.762 4.762 0 0 1-4.767 4.765H442.8Z" style="fill:#0e2125;stroke:#fff;stroke-width:1.88812;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <path d="M301.064 194.43h84.8c30.739 0 54.104 0 54.104 11.694v7.404c0 11.698-23.656 11.698-54.104 11.698h-84.8Z" style="fill:none;stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <g class="plunger">
+                    <path d="M285.75 206.442h142.646v6.646H285.75Z" style="fill:#9e9e9e;stroke:#fff;stroke-width:1.51703;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                    <path d="M423.613 194.183v31.285h3.2v-4.525c-.004-.019 0-.039 0-.054 0-.58.43-1.048.968-1.048h1.18c.537 0 .972.469.972 1.048l.086 4.19 3.159-.607.001-29.343-3.285-.538v4.117c.004.02 0 .038 0 .055 0 .579-.431 1.046-.97 1.046h-1.179c-.537 0-.972-.468-.972-1.046v-4.58Z" style="fill:#4d4d4d" clip-path="url(#cp2)"></path>
+                    <path d="M255.09 202.838h30.66v13.98h-30.66Z" style="fill:#0e2125;stroke:#fff;stroke-width:1.88812;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                    <path d="M255.037 191.986a2.439 2.439 0 0 1 2.443 2.443v30.797a2.443 2.443 0 0 1-2.443 2.443 2.444 2.444 0 0 1-2.448-2.443v-30.797a2.44 2.44 0 0 1 2.448-2.443Z" style="fill:#0e2125"></path>
+                  </g>
+                  <path d="M294.626 187.996a6.421 6.421 0 0 1 6.438 6.433v30.797a6.422 6.422 0 0 1-6.438 6.437 6.42 6.42 0 0 1-6.432-6.437v-30.797a6.42 6.42 0 0 1 6.432-6.432Z" style="fill:#fff;stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <path d="M301.064 194.43h84.8c30.739 0 54.104 0 54.104 11.694v7.404c0 11.698-23.656 11.698-54.104 11.698h-84.8Z" style="fill:url(#lg3);stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" opacity="1" class="body"></path>
+                  <g class="overlay">
+                    <g class="ticks">
+                      <g style="fill:none;stroke:#0e2125;stroke-width:1.89108;stroke-linecap:round">
+                        <path d="M433.045 222v-9.605"></path>
+                        <path d="M414.405 223.943v-11.547"></path>
+                        <path d="M395.765 223.943v-11.547"></path>
+                        <path d="M377.124 223.943v-11.547"></path>
+                        <path d="M358.484 223.943v-11.547"></path>
+                        <path d="M339.843 223.943v-11.547"></path>
+                      </g>
+                      <g style="fill:none;stroke:#0e2125;stroke-width:.94406;stroke-linecap:round">
+                        <path d="M429.036 223.07v-6.094"></path>
+                        <path d="M425.499 223.883v-6.907"></path>
+                        <path d="M421.957 223.883v-6.907"></path>
+                        <path d="M418.42 223.883v-6.907"></path>
+                        <path d="M410.395 224.266v-7.29"></path>
+                        <path d="M406.859 224.266v-7.29"></path>
+                        <path d="M403.317 224.266v-7.29"></path>
+                        <path d="M399.78 224.266v-7.29"></path>
+                        <path d="M391.755 224.266v-7.29"></path>
+                        <path d="M388.217 224.266v-7.29"></path>
+                        <path d="M384.676 224.266v-7.29"></path>
+                        <path d="M381.14 224.266v-7.29"></path>
+                        <path d="M373.113 224.266v-7.29"></path>
+                        <path d="M369.577 224.266v-7.29"></path>
+                        <path d="M366.036 224.266v-7.29"></path>
+                        <path d="M362.499 224.266v-7.29"></path>
+                        <path d="M354.473 224.266v-7.29"></path>
+                        <path d="M350.936 224.266v-7.29"></path>
+                        <path d="M347.395 224.266v-7.29"></path>
+                        <path d="M343.859 224.266v-7.29"></path>
+                      </g>
+                    </g>
+                    <text xml:space="preserve" x="323.855" y="219.985" style="font-size:16px;stroke-width:1.33333">
+                      <tspan style="font-variant:normal;font-weight:300;font-size:9px;font-family:Outfit;fill:#28393d" x="323.855" y="219.985">ml</tspan>
+                    </text>
+                    <g class="markings">
+                      <text xml:space="preserve" x="333.533" y="209.183" style="font-size:10px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:10px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="333.533" y="209.183">.25</tspan>
+                      </text>
+                      <text xml:space="preserve" x="354.534" y="209.183" style="font-size:10px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:10px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="354.534" y="209.183">.2</tspan>
+                      </text>
+                      <text xml:space="preserve" x="372.139" y="209.183" style="font-size:10px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:10px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="372.139" y="209.183">.15</tspan>
+                      </text>
+                      <text xml:space="preserve" x="393.33" y="209.183" style="font-size:10px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:10px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="393.33" y="209.183">.1</tspan>
+                      </text>
+                      <text xml:space="preserve" x="406.143" y="209.183" style="font-size:10px;letter-spacing:-.75px;stroke-width:1.33333">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:10px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="406.143" y="209.183">.05</tspan>
+                      </text>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g transform="translate(464.267 209.617)">
+              <g class="syringe" id="s0_5ml" opacity="0" transform="translate(0 20)">
+                <g transform="translate(-464.267 -209.617)">
+
+                  <g clip-path="url(#cp1)" style="opacity:.6;fill:#aef">
+                    <path class="padd" opacity="0" d="M 433.17908,192.17062 H 441.4476 V 228.37934 H 433.17908 Z"></path>
+                    <g transform="translate(433.0448 210.77)">
+                      <g class="contents" transform="scale(0 1)" style="width: 50px;">
+                        <g transform="translate(-433.0448 -210.77)">
+                          <rect width="93.336304" height="39.666" x="339.843" y="190.442" ry="0"></rect>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                  <path d="M463.217 208.828v2h78.027l6.167-2Z" style="fill:#0e2125"></path>
+                  <path d="M442.8 205.061h15.756a4.759 4.759 0 0 1 4.767 4.767 4.762 4.762 0 0 1-4.767 4.765H442.8Z" style="fill:#0e2125;stroke:#fff;stroke-width:1.88812;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <g class="plunger">
+                    <path d="M282.856 203.26h145.54v13.01h-145.54Z" style="fill:#9e9e9e;stroke:#fff;stroke-width:1.51703;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                    <path d="M255.09 199.833h30.66v19.99h-30.66Z" style="fill:#0e2125;stroke:#fff;stroke-width:1.88812;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                    <path d="M255.037 185.64a2.439 2.439 0 0 1 2.443 2.443v43.484a2.443 2.443 0 0 1-2.443 2.443 2.444 2.444 0 0 1-2.448-2.443v-43.484a2.44 2.44 0 0 1 2.448-2.443Z" style="fill:#0e2125"></path>
+                    <path clip-path="url(#cp1)" d="M422.307 190.187v39.281h3.643v-4.552c-.003-.025 0-.052 0-.073 0-.786.491-1.422 1.103-1.422h1.343c.613 0 1.108.636 1.108 1.422l.097 4.3 3.597-1.026.001-36.645-3.74-.73v3.991c.004.027 0 .052 0 .074 0 .786-.49 1.421-1.104 1.421h-1.342c-.612 0-1.107-.636-1.107-1.421v-4.62Z" style="fill:#4d4d4d"></path>
+                  </g>
+                  <path d="M301.064 190.187h84.8c30.739 0 54.104 0 54.104 14.917v9.443c0 14.921-23.656 14.921-54.104 14.921h-84.8Z" style="fill:none;stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" class="body"></path>
+                  <path d="M294.626 181.65a6.421 6.421 0 0 1 6.438 6.433v43.484a6.422 6.422 0 0 1-6.438 6.437 6.42 6.42 0 0 1-6.432-6.437v-43.484a6.42 6.42 0 0 1 6.432-6.432Z" style="fill:#fff;stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <path d="M301.064 190.187h84.8c30.739 0 54.104 0 54.104 14.917v9.443c0 14.921-23.656 14.921-54.104 14.921h-84.8Z" style="fill:url(#lg2);stroke:#0e2125;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" opacity="1" class="body"></path>
+                  <g class="overlay">
+                    <g class="ticks">
+                      <g style="fill:none;stroke:#0e2125;stroke-width:1.89108;stroke-linecap:round">
+                        <path d="M433.045 224.88v-14.11"></path>
+                        <path d="M414.405 227.733v-16.962"></path>
+                        <path d="M395.765 227.733v-16.962"></path>
+                        <path d="M377.124 227.733v-16.962"></path>
+                        <path d="M358.484 227.733v-16.962"></path>
+                        <path d="M339.843 227.733v-16.962"></path>
+                      </g>
+                      <g style="fill:none;stroke:#0e2125;stroke-width:.94406;stroke-linecap:round">
+                        <path d="M429.036 226.452V217.5"></path>
+                        <path d="M425.499 227.645V217.5"></path>
+                        <path d="M421.957 227.645V217.5"></path>
+                        <path d="M418.42 227.645V217.5"></path>
+                        <path d="M410.395 228.208V217.5"></path>
+                        <path d="M406.859 228.208V217.5"></path>
+                        <path d="M403.317 228.208V217.5"></path>
+                        <path d="M399.78 228.208V217.5"></path>
+                        <path d="M391.755 228.208V217.5"></path>
+                        <path d="M388.217 228.208V217.5"></path>
+                        <path d="M384.676 228.208V217.5"></path>
+                        <path d="M381.14 228.208V217.5"></path>
+                        <path d="M373.113 228.208V217.5"></path>
+                        <path d="M369.577 228.208V217.5"></path>
+                        <path d="M366.036 228.208V217.5"></path>
+                        <path d="M362.499 228.208V217.5"></path>
+                        <path d="M354.473 228.208V217.5"></path>
+                        <path d="M350.936 228.208V217.5"></path>
+                        <path d="M347.395 228.208V217.5"></path>
+                        <path d="M343.859 228.208V217.5"></path>
+                      </g>
+                    </g>
+                    <text xml:space="preserve" x="323.853" y="224.227" style="font-size:16px;stroke-width:1.33333">
+                      <tspan style="font-variant:normal;font-weight:300;font-size:9px;font-family:Outfit;fill:#28393d" x="323.853" y="224.227">ml</tspan>
+                    </text>
+                    <g class="markings">
+                      <text xml:space="preserve" x="334.992" y="207.46">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="334.992" y="207.46">.5</tspan>
+                      </text>
+                      <text xml:space="preserve" x="353.429" y="207.46">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="353.429" y="207.46">.4</tspan>
+                      </text>
+                      <text xml:space="preserve" x="372.327" y="207.46">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="372.327" y="207.46">.3</tspan>
+                      </text>
+                      <text xml:space="preserve" x="390.95" y="207.46">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="390.95" y="207.46">.2</tspan>
+                      </text>
+                      <text xml:space="preserve" x="411.408" y="207.46">
+                        <tspan style="font-variant:normal;font-weight:500;font-size:12px;font-family:Outfit;letter-spacing:-.75px;fill:#28393d" x="411.408" y="207.46">.1</tspan>
+                      </text>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g id="bacteriostatic_vial">
+              <path style="fill:#aef" id="bact_water" clip-path="url(#cp8)" d="M251.177 442.948h96.599v85.197h-96.599z"></path>
+              <path d="M259.995 428.281c4.261-3.062 6.584-8.36 6.584-19.261h65.796c0 11.65 1.437 15.604 5.39 19.261 4.162 3.848 10.011 7.38 10.011 14.667v78.541a6.642 6.642 0 0 1-6.656 6.656h-83.287a6.642 6.642 0 0 1-6.656-6.656v-78.541c0-8.777 4.563-11.6 8.818-14.667Z" style="fill:none;stroke:#0e2125;stroke-width:2.59691;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+              <path d="M255.401 458.025h88.151v47.61h-88.15Z" style="fill:#ffe9b3"></path>
+              <text xml:space="preserve" x="257.76" y="478.197" style="font-size:16px;stroke-width:1.33333">
+                <tspan style="font-variant:normal;font-weight:500;font-size:10.3876px;font-family:Outfit;fill:#0e2125" x="257.76" dx="0 0 -0.51938128 -0.14542675 0 0 -0.14542675 0 -0.18697724 -0.31162876 -0.99721199 -0.99721199" y="478.197">BACTERIOSTATIC</tspan>
+                <tspan style="font-variant:normal;font-weight:500;font-size:10.3876px;font-family:Outfit;fill:#0e2125" x="257.76" dx="0 -0.8725605 -0.99721199" y="491.181">WATER</tspan>
+              </text>
+              <path d="M261.26 393.615h76.433a6.561 6.561 0 0 1 6.578 6.577v2.25a6.561 6.561 0 0 1-6.578 6.578H261.26a6.561 6.561 0 0 1-6.577-6.577v-2.251a6.561 6.561 0 0 1 6.577-6.577Z" style="fill:#f9f9f9;stroke:#0e2125;stroke-width:2.59691;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+              <path d="M259.995 428.281c4.26-3.062 6.584-8.36 6.584-19.261h65.796c0 11.65 1.437 15.604 5.39 19.261 4.162 3.848 10.011 7.38 10.011 14.667v78.541a6.642 6.642 0 0 1-6.656 6.656h-83.287a6.642 6.642 0 0 1-6.656-6.656v-78.541c0-8.777 4.563-11.6 8.818-14.667Z" style="fill:url(#lg11)" opacity="1"></path>
+              <path d="M259.995 428.281c4.261-3.062 6.584-8.36 6.584-19.261h65.796c0 11.65 1.437 15.604 5.39 19.261 4.162 3.848 10.011 7.38 10.011 14.667v78.541a6.642 6.642 0 0 1-6.656 6.656h-83.287a6.642 6.642 0 0 1-6.656-6.656v-78.541c0-8.777 4.563-11.6 8.818-14.667Z" style="fill:none;stroke:#0e2125;stroke-width:2.59691;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+            </g>
+            <g transform="translate(487.534 468.58252)">
+              <g id="medication_vial">
+                <g transform="translate(-487.534 -468.58252)">
+                  <path id="dry_medication" d="M535.833 521.489a6.642 6.642 0 0 1-6.656 6.656h-83.286a6.642 6.642 0 0 1-6.656-6.656l7.765-2.25 9.335.883 7.18-3.394 9.916-1.197 15.728-.889 6.56 1.376 6.153.839 6.883-.39 8.494.437 10.292.542Z" style="fill: green; opacity: 0; visibility: hidden;"></path>
+                  <path style="fill: rgb(170, 238, 255); translate: none; rotate: none; scale: none; transform-origin: 0px 0px;" id="mixed_medication" clip-path="url(#cp7)" d="M439.235 442.948h96.598v85.197h-96.598z" data-svg-origin="487.53399658203125 528.14501953125" transform="matrix(1,0,0,0,0,528.14502)"></path>
+                  <path d="M453.412 458.025h68.245v47.61h-68.245Z" style="fill:#ffe9b3"></path>
+                  <text xml:space="preserve" x="456.086" y="478.197" style="font-size:16px;stroke-width:1.33333">
+                    <tspan style="font-variant:normal;font-weight:500;font-size:10.3876px;font-family:Outfit;fill:#0e2125" x="456.086" dx="0 0 0 0 0 -0.18697724 -0.99721199" y="478.197">MEDICATION</tspan>
+                    <tspan style="font-variant:normal;font-weight:500;font-size:10.3876px;font-family:Outfit;fill:#0e2125" x="456.086" dx="0 0 0 -0.083100997" y="491.181">VIAL</tspan>
+                  </text>
+                  <path d="M459.99 428.281c2.953-3.062 4.562-8.36 4.562-19.261h45.599c0 11.65.994 15.604 3.734 19.261 2.886 3.848 21.948 7.38 21.948 14.667v78.541a6.642 6.642 0 0 1-6.656 6.656h-83.286a6.642 6.642 0 0 1-6.656-6.656v-78.541c0-8.777 17.806-11.6 20.754-14.667Z" style="fill:url(#lg11);stroke:none;stroke-width:2.59691;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <path d="M459.99 428.281c2.953-3.062 4.562-8.36 4.562-19.261h45.599c0 11.65.994 15.604 3.734 19.261 2.886 3.848 21.948 7.38 21.948 14.667v78.541a6.642 6.642 0 0 1-6.656 6.656h-83.286a6.642 6.642 0 0 1-6.656-6.656v-78.541c0-8.777 17.806-11.6 20.754-14.667Z" style="fill:none;stroke:#0e2125;stroke-width:2.59691;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                  <path d="M464.552 393.615h45.599a6.566 6.566 0 0 1 6.584 6.577v2.25a6.566 6.566 0 0 1-6.584 6.578h-45.599a6.566 6.566 0 0 1-6.583-6.577v-2.251a6.566 6.566 0 0 1 6.583-6.577Z" style="fill:#f9f9f9;stroke:#0e2125;stroke-width:2.59691;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"></path>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.shopify.com/s/files/1/0948/8541/3175/files/peptide_gsap.min.js?v=1761717811" defer="defer"></script>                   
+<script src="https://cdn.shopify.com/s/files/1/0948/8541/3175/files/peptide_app.js?v=1761717810" defer="defer"></script>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% comment %} <style> 
+  #shopify-section-template--17570798076015__peptide_calculator_JRfXEV.section, #shopify-section-template--17570798076015__peptide_calculator_JRfXEV .faq-section {padding-top: 0px !important;} #shopify-section-template--17570798076015__peptide_calculator_JRfXEV .peptide-calc-container {margin-top: 0px;} #shopify-section-template--17570798076015__peptide_calculator_JRfXEV .faq-hero.calculatorhero {padding-top: 160px; padding-bottom: 70px;} </style>{% endcomment %} </section>
+
+	{% schema %}
+
+	{
+	"name": "Calculator",          
+	"settings": [
+	{
+      "type": "text",
+      "id": "syringe_title",
+      "label": "Syringe Size Title",
+      "default": "Size of your syringe:"
+    }, 
+    {
+      "type": "range",
+      "id": "syringe_font_size",
+      "min": 12,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "label": "Syringe Font Size",
+      "default": 16
+    },
+	  {
+      "type": "text",
+      "id": "medication_title",
+      "label": "Medication Title",
+      "default": "Total amount of dry medication in your vial:"
+    },
+    {
+      "type": "range",
+      "id": "medication_font_size",
+      "min": 12,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "label": "Medication Font Size",
+      "default": 16
+    },
+	{
+      "type": "text",
+      "id": "bacteriostatic_title",
+      "label": "Bacteriostatic Title",
+      "default": "Total amount of bacteriostatic water you want to add:"
+    },
+     {
+      "type": "range",
+      "id": "bacteriostatic_font_size",
+      "min": 12,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "label": "Bacteriostatic Font Size",
+      "default": 16
+    },
+    {
+      "type": "text",
+      "id": "desired_title",
+      "label": "Desired Title",
+      "default": "Desired dose:"
+    },
+    {
+     "type": "range",
+     "id": "desired_font_size",
+     "min": 12,
+     "max": 72,
+     "step": 1,
+     "unit": "px",
+     "label": "Desired Font Size",
+     "default": 16
+   },
+   {
+    "type": "text",
+    "id": "results_title",
+    "label": "Results Title",
+    "default": "Results:"
+  },
+  {
+   "type": "range",
+   "id": "results_font_size",
+   "min": 12,
+   "max": 72,
+   "step": 1,
+   "unit": "px",
+   "label": "Results Font Size",
+   "default": 16
+ },
+  { 
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 52
+    }
+
+	],
+	
+	"presets": [{
+	"name": "Calculator",
+	"category": "Content"
+	}
+	]
+
+	}
+
+	{% endschema %}
+  <style>
+.section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  .syrings_title {
+    font-size: {{ section.settings.syringe_font_size }}px;	
+  }
+  h4.input_title.medication_font_size {
+    font-size: {{ section.settings.medication_font_size }}px;	
+  }
+  h4.input_title.bacteriostatic_font_size {
+    font-size: {{ section.settings.bacteriostatic_font_size }}px;	
+  }
+  h4.input_title.desired_font_size {
+    font-size: {{ section.settings.desired_font_size }}px;	
+  }
+  h4.input_title.results_font_size {
+    font-size: {{ section.settings.results_font_size }}px;	
+  }
+  </style>
