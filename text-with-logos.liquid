@@ -1,0 +1,1020 @@
+
+======= view dekhan liye text-with-logos.png dekho ======================
+
+
+<!-- sections/ways-of-working.liquid -->
+<div class="ways-of-working-section page-width" id="{{ section.id }}">
+  <div class="ways-of-working-container">
+    <!-- Main Heading -->
+    <h2 class="section-main-heading">{{ section.settings.main_heading | default: "WAYS OF WORKING" }}</h2>
+    
+    <div class="ways-of-working-content">
+      <!-- Left Column - Services -->
+      <div class="services-column">
+        {% for block in section.blocks %}
+          {% if block.type == 'service' %}
+            <div class="service-item" {{ block.shopify_attributes }}>
+              <h3 class="service-title">{{ block.settings.service_title }}</h3>
+              <div class="service-description">{{ block.settings.service_description }}</div>
+              
+              {% if block.settings.service_items != blank %}
+                <ul class="service-items-list">
+                  {% assign items = block.settings.service_items | split: '|' %}
+                  {% for item in items %}
+                    <li class="service-item-point">{{ item | strip }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+      <!-- Right Column - Experience -->
+      <div class="experience-column" style="background-color: {{ section.settings.experience_background_color }}; padding: {{ section.settings.experience_padding }}px; border-radius: {{ section.settings.experience_border_radius }}px;">
+        <h3 class="experience-heading">{{ section.settings.experience_heading | default: "EXPERIENCE WORKING WITH" }}</h3>
+        
+        <div class="brands-grid">
+          {% for block in section.blocks %}
+            {% if block.type == 'brand' %}
+              <div class="brand-item" {{ block.shopify_attributes }}>
+                {% if block.settings.brand_logo != blank %}
+                  <div class="brand-logo">
+                    <img 
+                      src="{{ block.settings.brand_logo | img_url: '400x' }}" 
+                      alt="{{ block.settings.brand_name | default: 'Brand' }}" 
+                      loading="lazy"
+                      width="{{ section.settings.brand_logo_width }}"
+                      height="{{ section.settings.brand_logo_height }}"
+                      style="max-width: {{ section.settings.brand_logo_max_width }}px; max-height: {{ section.settings.brand_logo_max_height }}px;"
+                    >
+                  </div>
+                {% else %}
+                  <div class="brand-name">{{ block.settings.brand_name }}</div>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+    #shopify-section-{{ section.id }}{
+        display:unset !important;
+    }
+  .ways-of-working-section {
+    padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px 0;
+    background-color: {{ section.settings.background_color }};
+    position: relative;
+    width: 100%;
+  }
+
+  .ways-of-working-section.page-width {
+    max-width: 100%;
+  }
+
+  .ways-of-working-container {
+    max-width: {{ section.settings.section_max_width }}px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-main-heading {
+    font-size: {{ section.settings.main_heading_font_size }}px;
+    font-weight: {{ section.settings.main_heading_font_weight }};
+    color: {{ section.settings.heading_color }};
+    text-align: center;
+    letter-spacing: {{ section.settings.main_heading_letter_spacing }}px;
+    margin: 0 0 {{ section.settings.main_heading_margin_bottom }}px 0;
+    line-height: 1.1;
+  }
+
+  .ways-of-working-content {
+    display: flex;
+    gap: {{ section.settings.columns_gap }}px;
+    align-items: flex-start;
+  }
+
+  /* Services Column */
+  .services-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.service_gap }}px;
+  }
+
+  .service-item {
+    padding: {{ section.settings.service_padding }}px;
+    background-color: {{ section.settings.service_background_color }};
+    border-radius: {{ section.settings.service_border_radius }}px;
+    border-left: {{ section.settings.service_accent_width }}px solid {{ section.settings.service_accent_color }};
+  }
+
+  .service-title {
+    font-size: {{ section.settings.service_title_font_size }}px;
+    font-weight: {{ section.settings.service_title_font_weight }};
+    color: {{ section.settings.service_title_color }};
+    letter-spacing: {{ section.settings.service_title_letter_spacing }}px;
+    margin: 0 0 {{ section.settings.service_title_margin_bottom }}px 0;
+    line-height: 1.2;
+  }
+
+  .service-description {
+    font-size: {{ section.settings.service_description_font_size }}px;
+    line-height: {{ section.settings.service_description_line_height }};
+    color: {{ section.settings.service_description_color }};
+    margin-bottom: {{ section.settings.service_description_margin_bottom }}px;
+  }
+
+  .service-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.service_items_gap }}px;
+  }
+
+  .service-item-point {
+    font-size: {{ section.settings.service_items_font_size }}px;
+    line-height: {{ section.settings.service_items_line_height }};
+    color: {{ section.settings.service_items_color }};
+    position: relative;
+    padding-left: 16px;
+  }
+
+  .service-item-point::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: {{ section.settings.service_items_bullet_color }};
+    font-size: 16px;
+  }
+
+  /* Experience Column - Sticky */
+  .experience-column {
+    flex: 0 0 {{ section.settings.experience_column_width }}%;
+    position: sticky;
+    top: {{ section.settings.sticky_top_position }}px;
+    align-self: flex-start;
+    transition: all 0.3s ease;
+  }
+
+  .experience-heading {
+    font-size: {{ section.settings.experience_heading_font_size }}px;
+    font-weight: {{ section.settings.experience_heading_font_weight }};
+    color: {{ section.settings.experience_heading_color }};
+    letter-spacing: {{ section.settings.experience_heading_letter_spacing }}px;
+    margin: 0 0 {{ section.settings.experience_heading_margin_bottom }}px 0;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .brands-grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.brands_per_row }}, 1fr);
+    gap: {{ section.settings.brands_gap }}px;
+  }
+
+  .brand-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: {{ section.settings.brand_padding }}px;
+    background-color: {{ section.settings.brand_background_color }};
+    border-radius: {{ section.settings.brand_border_radius }}px;
+    min-height: {{ section.settings.brand_min_height }}px;
+    text-align: center;
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .brand-logo img {
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .brand-name {
+    font-size: {{ section.settings.brand_name_font_size }}px;
+    font-weight: {{ section.settings.brand_name_font_weight }};
+    color: {{ section.settings.brand_name_color }};
+    text-transform: uppercase;
+    letter-spacing: {{ section.settings.brand_name_letter_spacing }}px;
+    line-height: 1.1;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .ways-of-working-content {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .experience-column {
+      flex: none;
+      width: 100%;
+      position: static;
+    }
+
+    .brands-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ways-of-working-container {
+      padding: 0 1.5rem;
+    }
+
+    .ways-of-working-section {
+      padding: {{ section.settings.section_padding_top_mobile }}px 0 {{ section.settings.section_padding_bottom_mobile }}px 0;
+    }
+
+    .section-main-heading {
+      font-size: {{ section.settings.main_heading_font_size_mobile }}px;
+    }
+
+    .service-title {
+      font-size: {{ section.settings.service_title_font_size_mobile }}px;
+    }
+
+    .experience-heading {
+      font-size: {{ section.settings.experience_heading_font_size_mobile }}px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ways-of-working-container {
+      padding: 0 1rem;
+    }
+
+    .brands-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Ways of Working Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Main Heading"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "WAYS OF WORKING"
+    },
+    {
+      "type": "range",
+      "id": "main_heading_font_size",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Main Heading Font Size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "main_heading_font_size_mobile",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Main Heading Font Size (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "main_heading_font_weight",
+      "label": "Main Heading Font Weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "main_heading_letter_spacing",
+      "min": 0,
+      "max": 5,
+      "step": 0.1,
+      "unit": "px",
+      "label": "Main Heading Letter Spacing",
+      "default": 1.5
+    },
+    {
+      "type": "range",
+      "id": "main_heading_margin_bottom",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Main Heading Bottom Margin",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Experience Section"
+    },
+    {
+      "type": "text",
+      "id": "experience_heading",
+      "label": "Experience Heading",
+      "default": "EXPERIENCE WORKING WITH"
+    },
+    {
+      "type": "color",
+      "id": "experience_background_color",
+      "label": "Experience Column Background Color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "range",
+      "id": "experience_padding",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Experience Column Padding",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "experience_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Experience Column Border Radius",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "sticky_top_position",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Sticky Top Position",
+      "default": 100,
+      "info": "Distance from top of viewport when sticky"
+    },
+    {
+      "type": "range",
+      "id": "experience_heading_font_size",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Experience Heading Font Size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "experience_heading_font_size_mobile",
+      "min": 14,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "label": "Experience Heading Font Size (Mobile)",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "experience_heading_font_weight",
+      "label": "Experience Heading Font Weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "experience_heading_letter_spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.1,
+      "unit": "px",
+      "label": "Experience Heading Letter Spacing",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "experience_heading_margin_bottom",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Experience Heading Bottom Margin",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "experience_column_width",
+      "min": 25,
+      "max": 45,
+      "step": 5,
+      "unit": "%",
+      "label": "Experience Column Width",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "brands_per_row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Brands Per Row",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "brands_gap",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Brands Gap",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "brand_padding",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Brand Item Padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "brand_min_height",
+      "min": 60,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Brand Item Min Height",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Brand Logo Size"
+    },
+    {
+      "type": "range",
+      "id": "brand_logo_max_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Brand Logo Max Width",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "brand_logo_max_height",
+      "min": 30,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Brand Logo Max Height",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "brand_logo_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Brand Logo Width",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "brand_logo_height",
+      "min": 30,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Brand Logo Height",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "brand_name_font_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Brand Name Font Size",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "brand_name_font_weight",
+      "label": "Brand Name Font Weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "brand_name_letter_spacing",
+      "min": 0,
+      "max": 3,
+      "step": 0.1,
+      "unit": "px",
+      "label": "Brand Name Letter Spacing",
+      "default": 0.8
+    },
+    {
+      "type": "header",
+      "content": "Services Section"
+    },
+    {
+      "type": "range",
+      "id": "service_title_font_size",
+      "min": 16,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Service Title Font Size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "service_title_font_size_mobile",
+      "min": 14,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Service Title Font Size (Mobile)",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "service_title_font_weight",
+      "label": "Service Title Font Weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "600",
+          "label": "Semi Bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold"
+        }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "service_title_letter_spacing",
+      "min": 0,
+      "max": 2,
+      "step": 0.1,
+      "unit": "px",
+      "label": "Service Title Letter Spacing",
+      "default": 0.5
+    },
+    {
+      "type": "range",
+      "id": "service_title_margin_bottom",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Service Title Bottom Margin",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "service_description_font_size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Service Description Font Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "service_description_line_height",
+      "min": 1.3,
+      "max": 1.8,
+      "step": 0.1,
+      "label": "Service Description Line Height",
+      "default": 1.5
+    },
+    {
+      "type": "range",
+      "id": "service_description_margin_bottom",
+      "min": 10,
+      "max": 30,
+      "step": 5,
+      "unit": "px",
+      "label": "Service Description Bottom Margin",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "service_items_font_size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Service Items Font Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "service_items_line_height",
+      "min": 1.3,
+      "max": 1.8,
+      "step": 0.1,
+      "label": "Service Items Line Height",
+      "default": 1.5
+    },
+    {
+      "type": "range",
+      "id": "service_items_gap",
+      "min": 5,
+      "max": 20,
+      "step": 5,
+      "unit": "px",
+      "label": "Service Items Gap",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Layout & Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_max_width",
+      "min": 800,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "label": "Section Max Width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "columns_gap",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Columns Gap",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "service_gap",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Services Gap",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "service_padding",
+      "min": 15,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Service Item Padding",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "service_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Service Item Border Radius",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "service_accent_width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Service Accent Border Width",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "service_background_color",
+      "label": "Service Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "service_accent_color",
+      "label": "Service Accent Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "service_title_color",
+      "label": "Service Title Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "service_description_color",
+      "label": "Service Description Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "service_items_color",
+      "label": "Service Items Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "service_items_bullet_color",
+      "label": "Service Items Bullet Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "experience_heading_color",
+      "label": "Experience Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "brand_background_color",
+      "label": "Brand Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "brand_name_color",
+      "label": "Brand Name Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Bottom",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Top (Mobile)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section Padding Bottom (Mobile)",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service",
+      "settings": [
+        {
+          "type": "text",
+          "id": "service_title",
+          "label": "Service Title",
+          "default": "Fractional Leadership"
+        },
+        {
+          "type": "textarea",
+          "id": "service_description",
+          "label": "Service Description",
+          "default": "Ongoing part-time COO level support"
+        },
+        {
+          "type": "textarea",
+          "id": "service_items",
+          "label": "Service Items",
+          "info": "Separate items with | (pipe) character",
+          "default": "Specific initiatives|Operational build-outs|Retail readiness assessments|Retail pitch support"
+        }
+      ]
+    },
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand_logo",
+          "label": "Brand Logo"
+        },
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand Name",
+          "info": "Used if no logo is uploaded",
+          "default": "TARGET"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ways of Working Section",
+      "category": "Custom Sections",
+      "blocks": [
+        {
+          "type": "service",
+          "settings": {
+            "service_title": "Fractional Leadership",
+            "service_description": "Ongoing part-time COO level support",
+            "service_items": ""
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "service_title": "Project-Based Consulting",
+            "service_description": "",
+            "service_items": "Specific initiatives|Operational build-outs|Retail readiness assessments|Retail pitch support"
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "service_title": "Advisory Retainer",
+            "service_description": "",
+            "service_items": ""
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "service_title": "VIP Intensives",
+            "service_description": "1–2 day operational deep dives for clarity and action",
+            "service_items": ""
+          }
+        },
+        {
+          "type": "brand",
+          "settings": {
+            "brand_name": "TARGET"
+          }
+        },
+        {
+          "type": "brand",
+          "settings": {
+            "brand_name": "Milk"
+          }
+        },
+        {
+          "type": "brand",
+          "settings": {
+            "brand_name": "CVS"
+          }
+        },
+        {
+          "type": "brand",
+          "settings": {
+            "brand_name": "SUSPENSIONALS"
+          }
+        },
+        {
+          "type": "brand",
+          "settings": {
+            "brand_name": "SEGHOLASTIC"
+          }
+        },
+        {
+          "type": "brand",
+          "settings": {
+            "brand_name": "five BEEW"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
