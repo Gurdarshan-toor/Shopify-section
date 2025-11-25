@@ -1,0 +1,581 @@
+<div class="step-by-step-grid-smooth">
+  {%- if article.metafields.custom.main_heading != blank -%}
+      <h2 class="main-heading-smooth">
+      {{ article.metafields.custom.main_heading }}
+    </h2>
+    {%- endif -%}
+  
+  {% comment %} <div class="steps-grid-container-smooth">
+    {%- assign steps = shop.metaobjects.step_by_step_guide.values -%}
+    
+    {%- for step in steps -%}
+      <div class="step-grid-card-smooth">
+        <!-- 1. Image -->
+        {%- if step.step_image -%}
+          <div class="step-grid-image-smooth">
+            <img src="{{ step.step_image | img_url: '350x250', crop: 'center' }}" 
+                 alt="{{ step.step_title }}" 
+                 class="grid-image-smooth"
+                 loading="lazy"
+                 width="350"
+                 height="250">
+          </div>
+        {%- endif -%}
+        
+        <!-- 2. Title with Number -->
+        <div class="step-grid-header-smooth">
+          <div class="step-grid-number-smooth">{{ forloop.index }}</div>
+          <h3 class="step-grid-title-smooth">{{ step.step_title }}</h3>
+        </div>
+        
+        <!-- 3. Description -->
+        <div class="step-grid-description-smooth">
+          <div class="grid-short-desc-smooth">
+            {{ step.step_description | strip_html | truncatewords: 25, "..." }}
+          </div>
+          <div class="grid-full-desc-smooth">
+            {{ step.step_description }}
+          </div>
+        </div>
+        
+        <!-- 4. Read More -->
+        <div class="step-grid-actions-smooth">
+          {%- if step.read_more_link -%}
+            <a href="{{ step.read_more_link }}" class="grid-read-more-simple">Read more</a>
+          {%- endif -%}
+          <button class="grid-toggle-btn-simple" data-step="{{ forloop.index }}">
+            <span class="grid-show-more-simple">Read more</span>
+            <span class="grid-show-less-simple">Show less</span>
+          </button>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div> {% endcomment %}
+
+
+ 
+<div class="steps-grid-container-smooth">
+  {%- assign step1 = article.metafields.custom.guide_step_by_step.value -%}
+  {%- assign step2 = article.metafields.custom.step_2.value -%}
+  {%- assign step3 = article.metafields.custom.step_3.value -%}
+  {%- assign step4 = article.metafields.custom.step_4.value -%}
+  {%- assign step5 = article.metafields.custom.step_5.value -%}
+  {%- assign step6 = article.metafields.custom.step_6.value -%}
+  
+  <!-- Step 1 -->
+  {%- if step1 -%}
+    <div class="step-grid-card-smooth">
+      {%- if step1.step_image -%}
+        <div class="step-grid-image-smooth">
+          <img src="{{ step1.step_image | img_url: '350x250', crop: 'center' }}" 
+               alt="{{ step1.step_title }}" 
+               class="grid-image-smooth"
+               loading="lazy"
+               width="350"
+               height="250">
+        </div>
+      {%- endif -%}
+      
+      <div class="step-grid-header-smooth">
+        <div class="step-grid-number-smooth">1</div>
+        <h3 class="step-grid-title-smooth">{{ step1.step_title }}</h3>
+      </div>
+      
+      <div class="step-grid-description-smooth">
+        <div class="grid-short-desc-smooth">
+          {{ step1.step_description | strip_html | truncatewords: 25, "..." }}
+        </div>
+        <div class="grid-full-desc-smooth">
+          {{ step1.step_description }}
+        </div>
+      </div>
+      
+      <div class="step-grid-actions-smooth">
+        {%- if step1.read_more_link -%}
+          <a href="{{ step1.read_more_link }}" class="grid-read-more-simple">Read more</a>
+        {%- endif -%}
+        <button class="grid-toggle-btn-simple" data-step="1">
+          <span class="grid-show-more-simple">Read more</span>
+          <span class="grid-show-less-simple">Show less</span>
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <!-- Step 2 -->
+  {%- if step2 -%}
+    <div class="step-grid-card-smooth">
+      {%- if step2.step_image -%}
+        <div class="step-grid-image-smooth">
+          <img src="{{ step2.step_image | img_url: '350x250', crop: 'center' }}" 
+               alt="{{ step2.step_title }}" 
+               class="grid-image-smooth"
+               loading="lazy"
+               width="350"
+               height="250">
+        </div>
+      {%- endif -%}
+      
+      <div class="step-grid-header-smooth">
+        <div class="step-grid-number-smooth">2</div>
+        <h3 class="step-grid-title-smooth">{{ step2.step_title }}</h3>
+      </div>
+      
+      <div class="step-grid-description-smooth">
+        <div class="grid-short-desc-smooth">
+          {{ step2.step_description | strip_html | truncatewords: 25, "..." }}
+        </div>
+        <div class="grid-full-desc-smooth">
+          {{ step2.step_description }}
+        </div>
+      </div>
+      
+      <div class="step-grid-actions-smooth">
+        {%- if step2.read_more_link -%}
+          <a href="{{ step2.read_more_link }}" class="grid-read-more-simple">Read more</a>
+        {%- endif -%}
+        <button class="grid-toggle-btn-simple" data-step="2">
+          <span class="grid-show-more-simple">Read more</span>
+          <span class="grid-show-less-simple">Show less</span>
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <!-- Step 3 -->
+  {%- if step3 -%}
+    <div class="step-grid-card-smooth">
+      {%- if step3.step_image -%}
+        <div class="step-grid-image-smooth">
+          <img src="{{ step3.step_image | img_url: '350x250', crop: 'center' }}" 
+               alt="{{ step3.step_title }}" 
+               class="grid-image-smooth"
+               loading="lazy"
+               width="350"
+               height="250">
+        </div>
+      {%- endif -%}
+      
+      <div class="step-grid-header-smooth">
+        <div class="step-grid-number-smooth">3</div>
+        <h3 class="step-grid-title-smooth">{{ step3.step_title }}</h3>
+      </div>
+      
+      <div class="step-grid-description-smooth">
+        <div class="grid-short-desc-smooth">
+          {{ step3.step_description | strip_html | truncatewords: 25, "..." }}
+        </div>
+        <div class="grid-full-desc-smooth">
+          {{ step3.step_description }}
+        </div>
+      </div>
+      
+      <div class="step-grid-actions-smooth">
+        {%- if step3.read_more_link -%}
+          <a href="{{ step3.read_more_link }}" class="grid-read-more-simple">Read more</a>
+        {%- endif -%}
+        <button class="grid-toggle-btn-simple" data-step="3">
+          <span class="grid-show-more-simple">Read more</span>
+          <span class="grid-show-less-simple">Show less</span>
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <!-- Step 4 -->
+  {%- if step4 -%}
+    <div class="step-grid-card-smooth">
+      {%- if step4.step_image -%}
+        <div class="step-grid-image-smooth">
+          <img src="{{ step4.step_image | img_url: '350x250', crop: 'center' }}" 
+               alt="{{ step4.step_title }}" 
+               class="grid-image-smooth"
+               loading="lazy"
+               width="350"
+               height="250">
+        </div>
+      {%- endif -%}
+      
+      <div class="step-grid-header-smooth">
+        <div class="step-grid-number-smooth">4</div>
+        <h3 class="step-grid-title-smooth">{{ step4.step_title }}</h3>
+      </div>
+      
+      <div class="step-grid-description-smooth">
+        <div class="grid-short-desc-smooth">
+          {{ step4.step_description | strip_html | truncatewords: 25, "..." }}
+        </div>
+        <div class="grid-full-desc-smooth">
+          {{ step4.step_description }}
+        </div>
+      </div>
+      
+      <div class="step-grid-actions-smooth">
+        {%- if step4.read_more_link -%}
+          <a href="{{ step4.read_more_link }}" class="grid-read-more-simple">Read more</a>
+        {%- endif -%}
+        <button class="grid-toggle-btn-simple" data-step="4">
+          <span class="grid-show-more-simple">Read more</span>
+          <span class="grid-show-less-simple">Show less</span>
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <!-- Step 5 -->
+  {%- if step5 -%}
+    <div class="step-grid-card-smooth">
+      {%- if step5.step_image -%}
+        <div class="step-grid-image-smooth">
+          <img src="{{ step5.step_image | img_url: '350x250', crop: 'center' }}" 
+               alt="{{ step5.step_title }}" 
+               class="grid-image-smooth"
+               loading="lazy"
+               width="350"
+               height="250">
+        </div>
+      {%- endif -%}
+      
+      <div class="step-grid-header-smooth">
+        <div class="step-grid-number-smooth">5</div>
+        <h3 class="step-grid-title-smooth">{{ step5.step_title }}</h3>
+      </div>
+      
+      <div class="step-grid-description-smooth">
+        <div class="grid-short-desc-smooth">
+          {{ step5.step_description | strip_html | truncatewords: 25, "..." }}
+        </div>
+        <div class="grid-full-desc-smooth">
+          {{ step5.step_description }}
+        </div>
+      </div>
+      
+      <div class="step-grid-actions-smooth">
+        {%- if step5.read_more_link -%}
+          <a href="{{ step5.read_more_link }}" class="grid-read-more-simple">Read more</a>
+        {%- endif -%}
+        <button class="grid-toggle-btn-simple" data-step="5">
+          <span class="grid-show-more-simple">Read more</span>
+          <span class="grid-show-less-simple">Show less</span>
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <!-- Step 6 -->
+  {%- if step6 -%}
+    <div class="step-grid-card-smooth">
+      {%- if step6.step_image -%}
+        <div class="step-grid-image-smooth">
+          <img src="{{ step6.step_image | img_url: '350x250', crop: 'center' }}" 
+               alt="{{ step6.step_title }}" 
+               class="grid-image-smooth"
+               loading="lazy"
+               width="350"
+               height="250">
+        </div>
+      {%- endif -%}
+      
+      <div class="step-grid-header-smooth">
+        <div class="step-grid-number-smooth">6</div>
+        <h3 class="step-grid-title-smooth">{{ step6.step_title }}</h3>
+      </div>
+      
+      <div class="step-grid-description-smooth">
+        <div class="grid-short-desc-smooth">
+          {{ step6.step_description | strip_html | truncatewords: 25, "..." }}
+        </div>
+        <div class="grid-full-desc-smooth">
+          {{ step6.step_description }}
+        </div>
+      </div>
+      
+      <div class="step-grid-actions-smooth">
+        {%- if step6.read_more_link -%}
+          <a href="{{ step6.read_more_link }}" class="grid-read-more-simple">Read more</a>
+        {%- endif -%}
+        <button class="grid-toggle-btn-simple" data-step="6">
+          <span class="grid-show-more-simple">Read more</span>
+          <span class="grid-show-less-simple">Show less</span>
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+</div>
+
+<style>
+.step-by-step-grid-smooth {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+.main-heading-smooth {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #000;
+}
+
+.steps-grid-container-smooth {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.step-grid-card-smooth {
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 0;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.step-grid-card-smooth:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.step-grid-image-smooth {
+  width: 100%;
+  overflow: hidden;
+}
+
+.grid-image-smooth {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.step-grid-card-smooth:hover .grid-image-smooth {
+  transform: scale(1.05);
+}
+
+.step-grid-header-smooth {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 25px 25px 0 25px;
+  margin-bottom: 15px;
+}
+
+.step-grid-number-smooth {
+  background: linear-gradient(135deg, #000 0%, #333 100%);
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.step-grid-title-smooth {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #000;
+  line-height: 1.3;
+}
+
+.step-grid-description-smooth {
+  padding: 0 25px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 20px;
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.grid-short-desc-smooth {
+  font-size: 15px;
+  transition: all 0.4s ease;
+}
+
+.grid-full-desc-smooth {
+  font-size: 15px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+/* Active state - show full description, hide short description */
+.grid-full-desc-smooth.active {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 10px;
+}
+
+.grid-short-desc-smooth.hidden {
+  display: none;
+}
+
+.step-grid-actions-smooth {
+  padding: 0 25px 25px 25px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Simple text-only button styles */
+.grid-read-more-simple {
+  color: #000;
+  text-decoration: underline;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.grid-toggle-btn-simple {
+  color: #000;
+  text-decoration: underline;
+  font-size: 13px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.grid-show-less-simple {
+  display: none;
+}
+
+/* Active state for toggle button */
+.grid-toggle-btn-simple.active .grid-show-more-simple {
+  display: none;
+}
+
+.grid-toggle-btn-simple.active .grid-show-less-simple {
+  display: inline;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .steps-grid-container-smooth {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
+  }
+  
+  .step-by-step-grid-smooth {
+    padding: 50px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .step-by-step-grid-smooth {
+    padding: 40px 20px;
+    max-width: 100%;
+  }
+  
+  .main-heading-smooth {
+    font-size: 24px;
+    margin-bottom: 50px;
+  }
+  
+  .steps-grid-container-smooth {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .step-grid-header-smooth {
+    padding: 20px 20px 0 20px;
+  }
+  
+  .step-grid-description-smooth {
+    padding: 0 20px;
+  }
+  
+  .step-grid-actions-smooth {
+    padding: 0 20px 20px 20px;
+  }
+  
+  .grid-image-smooth {
+    height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-grid-actions-smooth {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .step-grid-header-smooth {
+    {% comment %} flex-direction: column; {% endcomment %}
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .main-heading-smooth {
+    font-size: 24px;
+  }
+  
+  .step-by-step-grid-smooth {
+    padding: 30px 15px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleButtons = document.querySelectorAll('.grid-toggle-btn-simple');
+  
+  toggleButtons.forEach(button => {
+    const card = button.closest('.step-grid-card-smooth');
+    const fullDesc = card.querySelector('.grid-full-desc-smooth');
+    const shortDesc = card.querySelector('.grid-short-desc-smooth');
+    
+    // Initially hide full description
+    fullDesc.style.display = 'none';
+    
+    button.addEventListener('click', function() {
+      const isActive = fullDesc.classList.contains('active');
+      
+      if (!isActive) {
+        // Show full description with smooth animation
+        shortDesc.classList.add('hidden');
+        fullDesc.style.display = 'block';
+        
+        // Trigger animation
+        setTimeout(() => {
+          fullDesc.classList.add('active');
+          button.classList.add('active');
+        }, 10);
+      } else {
+        // Hide full description with smooth animation
+        fullDesc.classList.remove('active');
+        button.classList.remove('active');
+        
+        setTimeout(() => {
+          shortDesc.classList.remove('hidden');
+          fullDesc.style.display = 'none';
+        }, 400);
+      }
+    });
+  });
+});
+</script>
