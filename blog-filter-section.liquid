@@ -1,0 +1,506 @@
+<style>
+  .blog-filter-section {
+    padding: 4rem 0;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .blog-filter-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 0 20px;
+  }
+
+  .blog-header-image {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .blog-header-image img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .blog-filter-title {
+    font-size: 30px;
+    margin-bottom: 3rem;
+    color: #333;
+    font-weight: 700;
+  }
+
+  .blog-filter-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .blog-filter-tabs-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px 0;
+  }
+
+  .blog-filter-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    min-width: max-content;
+    padding: 0 10px;
+  }
+
+  .blog-filter-tab-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .blog-filter-tab-wrapper:hover {
+    transform: translateY(-5px);
+  }
+
+  .blog-filter-tab-wrapper.active {
+    transform: translateY(-5px);
+  }
+
+  .tab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    margin-bottom: 5px;
+  }
+
+  .tab-icon img {
+    display: block;
+    transition: transform 0.3s ease;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .blog-filter-tab-wrapper:hover .tab-icon img {
+    transform: scale(1.1);
+  }
+
+  .blog-filter-tab-wrapper.active .tab-icon img {
+    transform: scale(1.1);
+  }
+
+  .blog-filter-tab {
+    padding: 12px 24px;
+    background: #f8f8f8;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    color: #555;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    min-width: 120px;
+  }
+
+  .blog-filter-tab:hover {
+    background: #e8e8e8;
+    border-color: #ccc;
+  }
+
+  .blog-filter-tab-wrapper.active .blog-filter-tab {
+    background: #000;
+    color: white;
+    border-color: #000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .tab-label {
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .blog-filter-search {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .blog-search-input {
+    padding: 12px 20px;
+    border: 2px solid #000000;
+    border-radius: 25px;
+    width: 100%;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    background-color: #fff;
+  }
+
+  .blog-search-input:focus {
+    outline: none;
+    border-color: #000;
+  }
+
+  .blog-filter-content {
+    padding: 0 20px;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .blog-card {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    background: white;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .blog-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+  }
+
+  .blog-card-image {
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .blog-card:hover .blog-card-image img {
+    transform: scale(1.08);
+  }
+
+  .blog-card-content {
+    padding: 1.5rem;
+  }
+
+  .blog-card-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: #333;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .blog-card-excerpt {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  .blog-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    color: #888;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .blog-empty {
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 3rem;
+    color: #666;
+    font-size: 1.1rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    .blog-filter-section {
+      padding: 2rem 0;
+    }
+    
+    .blog-filter-title {
+      font-size: 2rem;
+    }
+    
+    .blog-filter-tabs {
+      gap: 1rem;
+    }
+    
+    .blog-filter-tab {
+      padding: 10px 18px;
+      min-width: 100px;
+    }
+  }
+</style>
+
+<div class="blog-filter-section">
+  <div class="blog-filter-header">
+    {%- if section.settings.header_image != blank -%}
+      <div class="blog-header-image">
+        <img 
+          src="{{ section.settings.header_image | img_url: '800x' }}" 
+          alt="{{ section.settings.header_image.alt | default: section.settings.heading }}"
+          loading="lazy"
+        >
+      </div>
+    {%- endif -%}
+    
+    <h1 class="blog-filter-title">{{ section.settings.heading | default: 'Nailster Guide Universe' }}</h1>
+    
+    <div class="blog-filter-controls">
+      <div class="blog-filter-tabs-container">
+        <div class="blog-filter-tabs">
+          {%- for block in section.blocks -%}
+            {%- assign icon_size = block.settings.icon_size | default: 60 -%}
+            <div class="blog-filter-tab-wrapper {% if forloop.first %}active{% endif %}" data-filter="{{ block.settings.category_value | default: 'all' }}">
+              {%- if block.settings.icon_image != blank -%}
+                <div class="tab-icon">
+                  <img 
+                    src="{{ block.settings.icon_image | img_url: '100x100' }}" 
+                    alt="{{ block.settings.category_label | default: 'Category' }}"
+                    width="{{ icon_size }}"
+                    height="{{ icon_size }}"
+                    loading="lazy"
+                  >
+                </div>
+              {%- else -%}
+                <div class="tab-icon">
+                  <div style="width: {{ icon_size }}px; height: {{ icon_size }}px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px;">
+                    {{ block.settings.category_label | default: 'C' | slice: 0, 1 }}
+                  </div>
+                </div>
+              {%- endif -%}
+              <button class="blog-filter-tab" type="button">
+                <span class="tab-label">{{ block.settings.category_label | default: 'All' }}</span>
+              </button>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      
+      <div class="blog-filter-search">
+        <input type="text" id="blog-search" placeholder="Søg..." class="blog-search-input">
+      </div>
+    </div>
+  </div>
+  
+  <div class="blog-filter-content">
+    <div class="blog-grid" id="blog-grid">
+      {%- if section.settings.blog != blank -%}
+        {%- assign selected_blog = blogs[section.settings.blog] -%}
+        {%- if selected_blog and selected_blog.articles.size > 0 -%}
+          {%- for article in selected_blog.articles limit: 12 -%}
+            <div class="blog-card" data-categories="{{ article.tags | join: ',' | downcase }}">
+              <a href="{{ article.url }}" class="blog-card-link">
+                {%- if article.image -%}
+                  <div class="blog-card-image">
+                    <img src="{{ article.image | img_url: '400x300', crop: 'center' }}" alt="{{ article.image.alt }}" loading="lazy">
+                  </div>
+                {%- endif -%}
+                <div class="blog-card-content">
+                  <h3 class="blog-card-title">{{ article.title }}</h3>
+                  <p class="blog-card-excerpt">
+                    {{ article.excerpt_or_content | strip_html | truncate: 120 }}
+                  </p>
+                  <div class="blog-card-meta">
+                    <span class="blog-card-date">{{ article.published_at | time_tag: format: 'date' }}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="blog-empty">
+            <p>No articles found in this blog.</p>
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        <div class="blog-empty">
+          <p>Please select a blog in the section settings.</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const filterTabWrappers = document.querySelectorAll('.blog-filter-tab-wrapper');
+  const blogCards = document.querySelectorAll('.blog-card');
+  const searchInput = document.getElementById('blog-search');
+  
+  if (filterTabWrappers.length > 0) {
+    filterTabWrappers.forEach(wrapper => {
+      wrapper.addEventListener('click', function() {
+        filterTabWrappers.forEach(w => w.classList.remove('active'));
+        this.classList.add('active');
+        
+        const filterValue = this.getAttribute('data-filter');
+        
+        blogCards.forEach(card => {
+          if (filterValue === 'all') {
+            card.style.display = 'block';
+          } else {
+            const categories = card.getAttribute('data-categories');
+            if (categories && categories.includes(filterValue)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+  }
+  
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase().trim();
+      
+      blogCards.forEach(card => {
+        const title = card.querySelector('.blog-card-title')?.textContent.toLowerCase() || '';
+        const excerpt = card.querySelector('.blog-card-excerpt')?.textContent.toLowerCase() || '';
+        
+        if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Blog Filter Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "header_image",
+      "label": "Header Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Nailster Guide Universe"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Select Blog"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category Tab",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon Image"
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon Size",
+          "min": 40,
+          "max": 100,
+          "step": 5,
+          "default": 60,
+          "unit": "px",
+          "info": "Minimum size is 40px"
+        },
+        {
+          "type": "text",
+          "id": "category_label",
+          "label": "Category Label",
+          "default": "All"
+        },
+        {
+          "type": "text",
+          "id": "category_value",
+          "label": "Category Value",
+          "default": "all"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog Filter Section",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "category_label": "All",
+            "category_value": "all",
+            "icon_size": 60
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_label": "Nail Art",
+            "category_value": "nail-art",
+            "icon_size": 60
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_label": "Gel Polish",
+            "category_value": "gel-polish",
+            "icon_size": 60
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_label": "Tipper",
+            "category_value": "tipper",
+            "icon_size": 60
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_label": "Removal",
+            "category_value": "removal",
+            "icon_size": 60
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_label": "Rubber Base",
+            "category_value": "rubber-base",
+            "icon_size": 60
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
