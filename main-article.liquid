@@ -1,0 +1,428 @@
+{% assign blog_content = article.metafields.custom.blog_content.value %}
+
+{% if blog_content %}
+<div data-blog-handle="{{ blog_content.custom_handle }}" style="display: none;"></div>
+
+<div class="custom-blog-section" style="margin: 60px auto; padding: 0 20px; max-width: 1400px;">
+
+  <div class="video-text-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; margin-bottom: 40px;">
+    
+    <!-- Video Side - 50% -->
+    <div class="video-side" style="width: 100%;">
+      {% if blog_content.youtube_video_id %}
+      <div class="video-player">
+        <div class="video-container" style="position: relative; padding-bottom: 75%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.15);">
+          <iframe 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+            src="https://www.youtube.com/embed/{{ blog_content.youtube_video_id }}?rel=0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Text Side - 50% -->
+    <div class="text-side" style="width: 100%;">
+      <div class="text-content">
+        <h1 class="hero__title">
+          {{ blog_content.step_title }}
+        </h1>
+        <p>
+          {{ blog_content.step_description }}
+        </p>
+      </div>
+      
+      {% assign product_list = blog_content.featured_products.value %}
+      
+      {% if product_list %}
+      <div class="products-slider-section" style="margin-top: 20px;">
+        <div class="section-header" style="margin-bottom: 15px;">
+          <h2>
+            Products used in this guide
+          </h2>
+        </div>
+
+        <div class="products-slider-container" style="position: relative;">
+          
+          <div class="products-slider-wrapper" style="overflow: hidden; padding: 10px 0;">
+            <div class="products-slider-track" 
+                 id="products-slider-track"
+                 style="display: flex; transition: transform 0.3s ease; gap: 15px;">
+              
+              {% for product in product_list %}
+              <div class="product-slide" style="min-width: calc(33.333% - 10px); flex-shrink: 0; box-sizing: border-box;">
+                <div class="product-card" style="background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border: 1px solid #eee; transition: all 0.3s ease; height: 100%;">
+                  
+                  <a href="{{ product.url }}" style="text-decoration: none; color: inherit; display: block; height: 100%;">
+                    
+                    <div class="product-image" style="margin-bottom: 12px; text-align: center;">
+                      {% if product.featured_image %}
+                      <img 
+                        src="{{ product.featured_image | img_url: '300x300', crop: 'center' }}" 
+                        alt="{{ product.title }}"
+                        style="width: 100%; object-fit: cover; border-radius: 8px;"
+                        loading="lazy"
+                      >
+                      {% else %}
+                      <div style="width: 100%; height: 180px; background: #f7fafc; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #a0aec0; border: 1px dashed #cbd5e0;">
+                        No Image
+                      </div>
+                      {% endif %}
+                    </div>
+
+                    <div class="product-info">
+                      <h3 style="font-size: 1rem; color: #2d3748; margin: 0 0 8px 0; line-height: 1.3; font-weight: 600; height: 2.6em; overflow: hidden;">
+                        {{ product.title }}
+                      </h3>
+                      
+                      <div class="product-price" style="font-weight: bold; color: #2c5aa0; font-size: 1.1rem;">
+                        {{ product.price | money }}
+                      </div>
+                    </div>
+
+                  </a>
+
+                </div>
+              </div>
+              {% endfor %}
+
+            </div>
+          </div>
+          
+          <!-- Navigation Buttons with Simple Visible Arrows -->
+          <button class="slider-prev" 
+                  style="position: absolute; top: 50%; transform: translateY(-50%); left: -25px; background: #000000; border: 1px solid #000; width: 40px; height: 49px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 10; color: white; font-size: 20px; font-weight: bold;">
+             {{ 'https://cdn.shopify.com/s/files/1/0941/3994/1246/files/prev-button.png?v=1763963530' | img_tag: 'Next Button' }}
+          </button>
+          <button class="slider-next" 
+                  style="position: absolute; top: 50%; transform: translateY(-50%); right: -25px; background: #000000; border: 1px solid #000; width: 40px; height: 49px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); z-index: 10; color: white; font-size: 20px; font-weight: bold;">
+            {{ 'https://cdn.shopify.com/s/files/1/0941/3994/1246/files/next-button.png?v=1763963530' | img_tag: 'Next Button' }}
+          </button>
+
+        </div>
+
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+{% render 'blog-step-by-step' %}
+<style>
+/* Product card hover effects */
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+  border-color: #2c5aa0 !important;
+}
+
+/* Slider controls with black background and visible arrows */
+.slider-prev, .slider-next {
+  background: #000000 !important;
+  border-color: #000000 !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+}
+
+.slider-prev:hover, .slider-next:hover {
+  background: #333333 !important;
+  border-color: #333333 !important;
+  color: white !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+.slider-prev:disabled, .slider-next:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: #666666 !important;
+  transform: translateY(-50%) !important;
+}
+
+.slider-prev:disabled:hover, .slider-next:disabled:hover {
+  transform: translateY(-50%) !important;
+}
+
+/* Arrow text styling */
+.slider-prev, .slider-next {
+  font-family: Arial, sans-serif !important;
+  line-height: 1 !important;
+}
+
+/* Slider wrapper padding for proper visibility */
+.products-slider-wrapper {
+  margin: 0 -10px;
+  padding: 10px !important;
+}
+
+/* Ensure proper slide width calculation */
+.product-slide {
+  flex: 0 0 calc(33.333% - 10px) !important;
+}
+.product-info {
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+  .video-text-layout {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  
+  .product-slide {
+    flex: 0 0 calc(50% - 10px) !important;
+    min-width: calc(50% - 10px) !important;
+  }
+  
+  .slider-prev, .slider-next {
+    display: flex !important;
+    left: -15px !important;
+    right: -15px !important;
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 18px !important;
+  }
+   .product-image img {
+    height: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-blog-section {
+    padding: 0 15px !important;
+    margin: 40px auto !important;
+  }
+  
+  .video-text-layout {
+    gap: 30px !important;
+    margin-bottom: 30px !important;
+  }
+  
+  .text-content h1 {
+    font-size: 1.8rem !important;
+  }
+  
+  .text-content p {
+    font-size: 1rem !important;
+  }
+  
+  .product-slide {
+    flex: 0 0 calc(50% - 10px) !important;
+    min-width: calc(50% - 10px) !important;
+  }
+  
+  .slider-prev, .slider-next {
+    display: flex !important;
+    left: -10px !important;
+    right: -10px !important;
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 16px !important;
+  }
+  .product-image img {
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-slide {
+    flex: 0 0 calc(100% - 10px) !important;
+    min-width: calc(100% - 10px) !important;
+  }
+  
+  .custom-blog-section {
+    padding: 0 10px !important;
+    margin: 30px auto !important;
+  }
+  
+  .video-container {
+    border-radius: 8px !important;
+  }
+  
+  .text-content h1 {
+    font-size: 1.6rem !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .slider-prev, .slider-next {
+    display: none !important;
+  }
+}
+
+/* Prevent layout shifts */
+.products-slider-track {
+  will-change: transform;
+}
+
+.product-slide {
+  backface-visibility: hidden;
+}
+
+/* Touch scrolling for mobile */
+@media (max-width: 768px) {
+  .products-slider-wrapper {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  
+  .products-slider-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .products-slider-track {
+    flex-wrap: nowrap !important;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sliderTrack = document.getElementById('products-slider-track');
+  if (!sliderTrack) return;
+  
+  const prevButton = document.querySelector('.slider-prev');
+  const nextButton = document.querySelector('.slider-next');
+  
+  // Get product count from DOM elements
+  const products = sliderTrack.querySelectorAll('.product-slide').length;
+  
+  if (products === 0) return;
+  
+  let currentIndex = 0;
+  const slidesToShow = 3;
+  
+  function updateSlider() {
+    const slideElement = sliderTrack.querySelector('.product-slide');
+    if (!slideElement) return;
+    
+    const slideWidth = slideElement.offsetWidth + 15; // Including gap
+    const containerWidth = sliderTrack.parentElement.offsetWidth;
+    const totalWidth = sliderTrack.scrollWidth;
+    
+    // Calculate maximum scrollable index
+    const maxScrollable = Math.max(0, totalWidth - containerWidth);
+    const maxIndex = Math.ceil(maxScrollable / slideWidth);
+    
+    // Calculate translation
+    const translation = Math.min(currentIndex * slideWidth, maxScrollable);
+    
+    sliderTrack.style.transform = `translateX(-${translation}px)`;
+    
+    // Update button states
+    if (prevButton) {
+      prevButton.disabled = currentIndex === 0;
+      prevButton.style.opacity = currentIndex === 0 ? '0.3' : '1';
+    }
+    
+    if (nextButton) {
+      const isDisabled = translation >= maxScrollable;
+      nextButton.disabled = isDisabled;
+      nextButton.style.opacity = isDisabled ? '0.3' : '1';
+    }
+  }
+  
+  // Event listeners for navigation
+  if (prevButton) {
+    prevButton.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
+      }
+    });
+  }
+  
+  if (nextButton) {
+    nextButton.addEventListener('click', () => {
+      const slideElement = sliderTrack.querySelector('.product-slide');
+      if (!slideElement) return;
+      
+      const slideWidth = slideElement.offsetWidth + 15;
+      const containerWidth = sliderTrack.parentElement.offsetWidth;
+      const totalWidth = sliderTrack.scrollWidth;
+      const maxScrollable = Math.max(0, totalWidth - containerWidth);
+      const currentTranslation = currentIndex * slideWidth;
+      
+      if (currentTranslation < maxScrollable) {
+        currentIndex++;
+        updateSlider();
+      }
+    });
+  }
+  
+  // Initialize slider after a small delay to ensure proper calculations
+  setTimeout(updateSlider, 100);
+  
+  // Handle responsive behavior
+  function handleResize() {
+    currentIndex = 0;
+    setTimeout(updateSlider, 150);
+  }
+  
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(handleResize, 250);
+  });
+  
+  // Recalculate when images load
+  const images = sliderTrack.querySelectorAll('img');
+  images.forEach(img => {
+    img.addEventListener('load', function() {
+      setTimeout(updateSlider, 50);
+    });
+  });
+  
+  // Also recalculate when all resources are loaded
+  window.addEventListener('load', function() {
+    setTimeout(updateSlider, 200);
+  });
+  
+  // Touch/swipe support for mobile
+  let startX = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+  let isDragging = false;
+  
+  sliderTrack.addEventListener('touchstart', touchStart);
+  sliderTrack.addEventListener('touchmove', touchMove);
+  sliderTrack.addEventListener('touchend', touchEnd);
+  
+  function touchStart(e) {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  }
+  
+  function touchMove(e) {
+    if (!isDragging) return;
+    const currentX = e.touches[0].clientX;
+    const diff = startX - currentX;
+    
+    // Only allow horizontal scrolling
+    if (Math.abs(diff) > 10) {
+      e.preventDefault();
+    }
+  }
+  
+  function touchEnd(e) {
+    isDragging = false;
+    const movedBy = startX - e.changedTouches[0].clientX;
+    
+    // If moved significantly, change slide
+    if (Math.abs(movedBy) > 50) {
+      if (movedBy > 0 && nextButton && !nextButton.disabled) {
+        // Swiped left - go to next
+        nextButton.click();
+      } else if (movedBy < 0 && prevButton && !prevButton.disabled) {
+        // Swiped right - go to previous
+        prevButton.click();
+      }
+    }
+  }
+});
+</script>
+
+{% endif %}
