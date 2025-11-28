@@ -1,0 +1,280 @@
+<div class="sleep-hero-banner" 
+     style="
+       position: relative;
+       margin-left: {{ section.settings.outer_padding_left }}px;
+       margin-right: {{ section.settings.outer_padding_right }}px;
+       border-radius: {{ section.settings.background_radius }}px;
+       overflow: hidden;
+     ">
+
+  <!-- MOBILE OUTER SPACING -->
+  <style>
+    @media(max-width:768px){
+      .sleep-hero-banner{
+        margin-left: {{ section.settings.outer_padding_left_mobile }}px !important;
+        margin-right: {{ section.settings.outer_padding_right_mobile }}px !important;
+      }
+    }
+  </style>
+
+  <!-- BACKGROUND IMAGE -->
+  <div class="hero-bg"
+       style="
+         background-image:url({{ section.settings.background_image | image_url }});
+         background-size:cover;
+         background-position:center;
+         position:absolute;
+         width:100%;
+         height:100%;
+         top:0; left:0;
+         border-radius: {{ section.settings.background_radius }}px;
+       ">
+  </div>
+
+  <!-- OVERLAY -->
+  <div class="hero-overlay"
+       style="
+         background: {{ section.settings.overlay_color }};
+         opacity: {{ section.settings.overlay_opacity | divided_by: 100 }};
+         position:absolute;
+         width:100%;
+         height:100%;
+         top:0; left:0;
+         border-radius: {{ section.settings.background_radius }}px;
+       ">
+  </div>
+
+  <!-- CONTENT WRAPPER -->
+  <div class="hero-content wrapper"
+       style="
+         position:relative;
+         z-index:3;
+         display:flex;
+         align-items:center;
+         justify-content:space-between;
+         height:{{ section.settings.banner_height }}px;
+         padding-left:{{ section.settings.side_padding }}px;
+         padding-right:{{ section.settings.side_padding }}px;
+         padding-top:{{ section.settings.padding_top }}px;
+         padding-bottom:{{ section.settings.padding_bottom }}px;
+       ">
+
+    <!-- LEFT TEXT -->
+    <div class="hero-text"
+         style="
+           max-width:520px;
+           color:white;
+           padding-left: {{ section.settings.content_left_padding }}px;
+         ">
+
+      <h1 class="hero-heading-1" 
+          style="font-size:{{ section.settings.heading_size }}px; font-weight:700; margin-bottom:10px;">
+        {{ section.settings.main_heading }}
+      </h1>
+
+      {% if section.settings.main_heading_2 != blank %}
+      <h2 class="hero-heading-2"
+          style="font-size:{{ section.settings.heading2_size }}px; font-weight:700; margin-bottom:20px;">
+        {{ section.settings.main_heading_2 }}
+      </h2>
+      {% endif %}
+
+      <div class="hero-subtext" style="font-size:18px; margin-bottom:20px;">
+        {{ section.settings.sub_text }}
+      </div>
+
+      {% if section.settings.button_text != blank %}
+      <a href="{{ section.settings.button_link }}"
+         class="hero-btn hero-btn--{{ section.settings.button_style }}">
+         {{ section.settings.button_text }}
+      </a>
+      {% endif %}
+
+    </div>
+
+    <!-- MOBILE-ONLY TOP IMAGE -->
+    <div class="hero-mobile-img">
+      {% if section.settings.mobile_only_image %}
+        <img src="{{ section.settings.mobile_only_image | image_url }}" alt="Mobile Banner">
+      {% endif %}
+    </div>
+
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="hero-marquee" style="background: #000000 !important;">
+    <div class="marquee-track">
+      {% for i in (1..20) %}
+      <span>{{ section.settings.marquee_text }}</span>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background-color: #ffffff !important;
+    margin-bottom: 22px;
+    padding-bottom: 25px;
+  }
+
+  /* BUTTON */
+  .hero-btn {
+    padding: 12px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .hero-btn--primary { background:white; color:142D4C; }
+  .hero-btn--secondary { background:#777; color:white; }
+  .hero-btn--outline { border:2px solid white; color:white; background: transparent; }
+
+  /* MARQUEE */
+  .hero-marquee {
+    width: 100%;
+    color: white;
+    overflow: hidden;
+    padding: 12px 0;
+    background: #000000 !important;
+    position: relative;
+    z-index: 4;
+  }
+  .marquee-track {
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+    display: inline-block;
+  }
+  .marquee-track span {
+    margin-right: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    display: inline-block;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* MOBILE IMAGE DEFAULT HIDDEN */
+  .hero-mobile-img { display: none; }
+
+  /* ---------------------- MOBILE VIEW (0–791px) ---------------------- */
+  @media (max-width: 791px) {
+
+    .hero-content {
+      flex-direction: column;
+      justify-content: flex-start !important;
+      height: auto !important;
+      padding: 0 !important;
+    }
+
+    .hero-text {
+      background: #252C34;
+      color: #ffffff;
+      width: 100%;
+      padding: 30px 22px !important;
+      max-width: 100% !important;
+      text-align: left;
+      order: 2;
+    }
+
+    .hero-heading-1 {
+      font-size: {{ section.settings.mobile_heading_size }}px !important;
+      margin-bottom: 0px !important;
+    }
+
+    .hero-heading-2 {
+      font-size: {{ section.settings.mobile_heading2_size }}px !important;
+    }
+
+    /* SHOW ONLY MOBILE IMAGE */
+    .hero-mobile-img {
+      display: block;
+      width: 100%;
+      order: -1;
+    }
+    .hero-mobile-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* REMOVE RIGHT IMAGE (no longer needed) */
+    .hero-right-img { display: none !important; }
+
+    .hero-marquee {
+      width: 100%;
+      padding: 10px 0;
+    }
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "Hero Sleep Banner Pro",
+  "settings": [
+
+    { "type": "image_picker", "id": "background_image", "label": "Background Image" },
+
+    { "type": "image_picker", "id": "mobile_only_image", "label": "Mobile Only Image (0–791px only)" },
+
+    { "type": "color", "id": "overlay_color", "label": "Overlay Color", "default": "#000" },
+    { "type": "range", "id": "overlay_opacity", "label": "Overlay Opacity", "min": 0, "max": 100, "default": 30, "step": 1 },
+
+    { "type": "range", "id": "background_radius", "label": "Background Radius", "min": 0, "max": 50, "default": 12, "step": 2 },
+
+    { "type": "text", "id": "main_heading", "label": "Main Heading 1", "default": "Sleep Big." },
+    { "type": "text", "id": "main_heading_2", "label": "Main Heading 2", "default": "Save Bigger." },
+
+    { "type": "range", "id": "heading_size", "label": "Heading Size Desktop", "min": 20, "max": 100, "default": 52, "step": 2 },
+    { "type": "range", "id": "heading2_size", "label": "Heading 2 Size Desktop", "min": 20, "max": 100, "default": 38, "step": 2 },
+
+    { "type": "range", "id": "mobile_heading_size", "label": "Heading Size Mobile", "min": 16, "max": 60, "default": 34, "step": 2 },
+    { "type": "range", "id": "mobile_heading2_size", "label": "Heading 2 Size Mobile", "min": 16, "max": 60, "default": 26, "step": 2 },
+
+    { "type": "richtext", "id": "sub_text", "label": "Description", "default": "<p>Τα καινοτόμα προϊόντα Prosleep με έκπτωση έως <strong>30%</strong>.</p>" },
+
+    { "type": "text", "id": "button_text", "label": "Button Text", "default": "BLACK FRIDAY SALE" },
+    { "type": "url", "id": "button_link", "label": "Button Link" },
+
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" },
+        { "value": "outline", "label": "Outline" }
+      ],
+      "default": "primary"
+    },
+
+    { "type": "range", "id": "padding_top", "label": "Padding Top", "min": 0, "max": 200, "default": 40, "step": 5 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding Bottom", "min": 0, "max": 200, "default": 40, "step": 5 },
+
+    { "type": "range", "id": "side_padding", "label": "Side Padding Desktop", "min": 0, "max": 100, "default": 30, "step": 2 },
+    { "type": "range", "id": "mobile_side_padding", "label": "Side Padding Mobile", "min": 0, "max": 50, "default": 20, "step": 2 },
+
+    { "type": "range", "id": "content_left_padding", "label": "Text Left Padding", "min": 0, "max": 100, "default": 0, "step": 2 },
+
+    { "type": "range", "id": "outer_padding_left", "label": "Outer Padding Left Desktop", "min": 0, "max": 200, "default": 20, "step": 5 },
+    { "type": "range", "id": "outer_padding_right", "label": "Outer Padding Right Desktop", "min": 0, "max": 200, "default": 20, "step": 5 },
+
+    { "type": "range", "id": "outer_padding_left_mobile", "label": "Outer Padding Left Mobile", "min": 0, "max": 100, "default": 10, "step": 5 },
+    { "type": "range", "id": "outer_padding_right_mobile", "label": "Outer Padding Right Mobile", "min": 0, "max": 100, "default": 10, "step": 5 },
+
+    { "type": "range", "id": "banner_height", "label": "Banner Height Desktop", "min": 200, "max": 900, "default": 500, "step": 10 },
+    { "type": "range", "id": "mobile_banner_height", "label": "Banner Height Mobile", "min": 200, "max": 900, "default": 450, "step": 10 },
+
+    { "type": "textarea", "id": "marquee_text", "label": "Marquee Text", "default": "BLACK FRIDAY 2025 ΕΩΣ 30% 🎉" }
+  ],
+
+  "presets": [
+    { "name": "Hero Sleep Banner Pro" }
+  ]
+}
+{% endschema %}
