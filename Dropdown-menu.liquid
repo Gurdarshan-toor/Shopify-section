@@ -1,0 +1,47 @@
+==== Ye tinker theme mein use kiya gya =============
+
+
+   <div class="header-menu__inner">
+        {% if block.settings.menu_style == blank or block.settings.menu_style == 'text' %}
+          {%- render 'simple-dropdown-menu', block: block -%}
+        {% else %}
+          {%- render 'header-menu' %} 
+        {% endif %}
+      </div>
+
+  =========== snnipet ======================      
+  <ul class="menu-list menu-list--desktop">
+  {% for link in linklists[block.settings.menu].links %}
+    {% assign link = forlink %}
+    <li class="menu-list__list-item {% if link.links != blank %}has-submenu{% endif %}">
+      <a href="{{ link.url }}" class="menu-list__link" {% if link.links != blank %}aria-haspopup="true"{% endif %}>
+        {{ link.title }}
+        {% if link.links != blank %}<span class="icon icon--arrow-down" style="margin-left:4px;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></span>{% endif %}
+      </a>
+
+      {% if link.links != blank %}
+        <ul class="simple-dropdown">
+          {% for childlink in link.links %}
+            <li class="simple-dropdown__item">
+              <a href="{{ childlink.url }}" class="simple-dropdown__link">
+                {{ childlink.title }}
+              </a>
+
+              {% if childlink.links != blank %}
+                <ul class="simple-dropdown simple-dropdown--level2">
+                  {% for grandchild in childlink.links %}
+                    <li class="simple-dropdown__item">
+                      <a href="{{ grandchild.url }}" class="simple-dropdown__link">{{ grandchild.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
